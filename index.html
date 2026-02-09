@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Untuk Bulan! 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Animasi Emoji Awal */
+        .emoji-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #ffe6f2;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fade-out 0.5s ease 5s forwards;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 35px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(36deg); opacity: 0; }
+        }
+
+        @keyframes fade-out {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .intro-title {
+            font-size: 2rem;
+            color: #ff69b4;
+            opacity: 0;
+            animation: show-title 1s ease 3s forwards;
+        }
+
+        @keyframes show-title {
+            to { opacity: 1; }
+        }
+
+        /* Halaman Slide Utama */
+        body {
+            background-color: #ffe6f2;
+            padding: 20px;
+        }
+
+        .slide-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 30px;
+        }
+
+        .slide {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            margin-bottom: 20px;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slide-in 0.8s ease forwards;
+        }
+
+        @keyframes slide-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide h1, .slide h2 {
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .slide p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            text-align: left;
+        }
+
+        .highlight {
+            font-style: italic;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        /* Tombol Navigasi */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4da6;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 500px) {
+            .intro-title { font-size: 1.5rem; }
+            .slide { padding: 20px; }
+            .slide p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animasi Emoji Awal -->
+    <div class="emoji-intro">
+        <div class="emoji" style="left: 10%; animation-delay: 0s;">💖</div>
+        <div class="emoji" style="left: 20%; animation-delay: 0.5s;">🌸</div>
+        <div class="emoji" style="left: 30%; animation-delay: 1s;">🦋</div>
+        <div class="emoji" style="left: 40%; animation-delay: 1.5s;">✨</div>
+        <div class="emoji" style="left: 50%; animation-delay: 2s;">🌙</div>
+        <div class="emoji" style="left: 60%; animation-delay: 2.5s;">🌹</div>
+        <div class="emoji" style="left: 70%; animation-delay: 3s;">⭐</div>
+        <div class="emoji" style="left: 80%; animation-delay: 3.5s;">💘</div>
+        <div class="intro-title">💖 HAI Bulan 🌙✨, INI UNTUK KAMU! 💖</div>
+    </div>
+
+    <!-- Slide Paragraf -->
+    <div class="slide-container">
+        <div class="slide active" id="slide1">
+            <p>Hai cantik... Udah buka belum? 😊 Kalau udah buka berarti hadiahnya udah sampe ya!</p>
+            <div class="nav-buttons">
+                <button onclick="nextSlide()">Lanjut →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide2">
+            <p>Emmm... Selamat Hari Valentine ya! Maaf ya aku gak nepati janji – padahal waktu itu udah janji gak bakal kasih apa-apa pas Valentine. Oh iya, btw suka gak sama hadiahnya?</p>
+            <div class="nav-buttons">
+                <button onclick="prevSlide()">← Sebelumnya</button>
+                <button onclick="nextSlide()">Lanjut →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <p>Emm jujur aja, sampe sekarang aku masih belum tahu kenapa suka sama kamu – soalnya kalian kan kembar, cuma beda satu <span class="highlight">Bulan</span> dan satunya <span class="highlight">Bintang</span> aja, jadi kadang aku masih bingung mana yang pertama aku suka, tapi yang jelas aku suka sama kalian berdua ya hehe. Tapi semoga dengan hadiah Valentine ini dan surat kecil ini, rasa suka yang ada di hati aku bisa terus tumbuh dan lama kelamaan bisa sampai ke kalian. Oiya maaf juga ya buat sekitar 2 bulan terakhir ini aku sering chat kamu dan mungkin juga sering ganggu – kalau kamu merasa risih atau terganggu, aku bener-bener minta maaf ya!</p>
+            <div class="nav-buttons">
+                <button onclick="prevSlide()">← Sebelumnya</button>
+                <button onclick="nextSlide()">Lanjut →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide4">
+            <p class="highlight">Jangan kasih tau atau liatin ke siapapun ya, aku malu banget 🫣</p>
+            <div class="nav-buttons">
+                <button onclick="prevSlide()">← Sebelumnya</button>
+                <button onclick="nextSlide()">Lanjut →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <p>Jadi yaudah sih itu aja yang aku mau bilang. Sekali lagi selamat hari Valentine ya cantik! Oiya jujur aku malu banget buat bilang semua ini langsung ke kamu, tapi yaudah deh harus berani kan? 😅 Dan karena aku sendiri belum jelas kenapa suka, aku bakal tetep suka aja deh – mungkin kalian belum mungkin suka sama aku, tapi gapapa, aku bakal tetap ada di sini kayak gini terus merawat rasa ini biar bisa terus tumbuh, nggak bakal move on! hehehe</p>
+            <div class="nav-buttons">
+                <button onclick="prevSlide()">← Sebelumnya</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigasi Slide
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide${n}`).classList.add('active');
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            const next = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            const prev = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            showSlide(prev);
+        }
+
+        // Tampilkan slide pertama setelah intro selesai
+        setTimeout(() => {
+            showSlide(1);
+        }, 5500);
+    </script>
+</body>
+  </html>
+
