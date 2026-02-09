@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>💖 SURPRISE UNTUK BULAN! ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+        }
+
+        body {
+            overflow-x: hidden;
+            padding: 10px;
+            background: url('https://cdn.pixabay.com/photo/2020/09/04/19/11/background-5542270_1280.jpg') no-repeat center fixed;
+            background-size: cover;
+        }
+
+        /* INTRO SUPER MERIAH */
+        .intro-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffd1dc 50%, #ffb3d9 100%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: intro-fade 1s ease 7s forwards;
+        }
+
+        .intro-title {
+            font-size: 3.8rem !important;
+            color: #ff0080;
+            text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff0080, 0 0 60px #ff69b4;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .intro-emoji {
+            position: absolute;
+            font-size: 60px;
+            animation: intro-float 5s ease-in-out infinite;
+        }
+
+        @keyframes intro-float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+        }
+
+        @keyframes intro-fade {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+
+        /* SLIDE WRAPPER */
+        .slide-wrapper {
+            max-width: 95%;
+            margin: 0 auto;
+            padding-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* SETIAP SLIDE ADA BACKGROUND & HIASAN KHUSUS */
+        .slide {
+            display: none;
+            padding: 60px 35px;
+            border-radius: 35px;
+            margin-bottom: 35px;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.7);
+            background-size: cover !important;
+            background-position: center !important;
+            background-blend-mode: overlay !important;
+            background-color: rgba(255, 255, 255,  255, 0.9) !important;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slide-pop 0.8s ease forwards;
+        }
+
+        @keyframes slide-pop {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BACKGROUND UNIK TIAP SLIDE */
+        #slide1 { background: url('https://cdn.pixabay.com/photo/2020/09/18/19/20/rose-5581736_1280.jpg') !important; }
+        #slide2 { background: url('https://cdn.pixabay.com/photo/2018/01/28/15/20/star-3113979_1280.jpg') !important; }
+        #slide3 { background: url('https://cdn.pixabay.com/photo/2017/08/30/09/09/flowers-2696848_1280.jpg') !important; }
+        #slide4 { background: url('https://cdn.pixabay.com/photo/2015/09/18/19/18/moon-947963_1280.jpg') !important; }
+        #slide5 { background: url('https://cdn.pixabay.com/photo/2020/05/03/19/54/heart-5129709_1280.jpg') !important; }
+
+
+        /* TULISAN BESAR & JELAS */
+        .slide p {
+            font-size: 1.7rem !important;
+            line-height: 2.3;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .highlight {
+            color: #ff0080;
+            font-size: 1.9rem !important;
+            text-shadow: 0 0 15px #ff69b4;
+        }
+
+
+        /* TOMBOL SUPER MERIAH */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff0080);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem !important;
+            font-weight: bold;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #ff0080, #ff69b4);
+            transform: translateY(-5px);
+            box-shadow: 0 0 35px rgba(255, 105, 180, 0.8);
+        }
+
+
+        /* MUSIK TOMBOL */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 20;
+            background: linear-gradient(45deg, #ff69b4, #ff0080);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 40px;
+            font-size: 1.3rem !important;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+        }
+
+
+        /* EFEK HIASAN GLOBAL */
+        .global-decor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .decor-item {
+            position: absolute;
+            font-size: 40px;
+            animation: float 12s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0); opacity: 1; }
+            50% { transform: translateY(-50px) rotate(15deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+
+        /* EFEK KHUSUS AKHIR */
+        .final-effect {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 8;
+            display: none;
+            pointer-events: none;
+        }
+
+        .final-item {
+            position: absolute;
+            font-size: 50px;
+            color: #ff0080;
+            animation: final-float 10s linear infinite;
+        }
+
+        @keyframes final-float {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- INTRO SECTION -->
+    <div class="intro-section">
+        <div class="intro-title">💖 HAI BULAN 🌙✨<br>SURPRISE DARI AKU! 💖</div>
+        <div class="intro-emoji" style="left: 5%; animation-delay: 0s;">💖</div>
+        <div class="intro-emoji" style="left: 15%; animation-delay: 0.5s;">🌸</div>
+        <div class="intro-emoji" style="left: 25%; animation-delay: 1s;">✨</div>
+        <div class="intro-emoji" style="left: 35%; animation-delay: 1.5s;">🌙</div>
+        <div class="intro-emoji" style="left: 45%; animation-delay: 2s;">🌹</div>
+        <div class="intro-emoji" style="left: 55%; animation-delay: 2.5s;">⭐</div>
+        <div class="intro-emoji" style="left: 65%; animation-delay: 3s;">💘</div>
+        <div class="intro-emoji" style="left: 75%; animation-delay: 3.5s;">🎀</div>
+        <div class="intro-emoji" style="left: 85%; animation-delay: 4s;">🌈</div>
+    </div>
+
+    <!-- GLOBAL HIASAN -->
+    <div class="global-decor" id="globalDecor"></div>
+
+    <!-- SLIDE UTAMA -->
+    <div class="slide-wrapper">
+        <div class="slide active" id="slide1">
+            <p>Hai cantik... Udah buka belum? 😊 Kalau udah buka berarti hadiahnya udah sampe ya!</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide2">
+            <p>Emmm... Selamat Hari Valentine ya! Maaf ya aku gak nepati janji – padahal udah janji gak kasih apa-apa. Oh iya, suka gak sama hadiahnya?</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <p>Emm jujur aja, aku masih belum tahu kenapa suka sama kamu – kalian kan kembar, cuma beda satu <span class="highlight">Bulan</span> sama <span class="highlight">Bintang</span> aja, tapi yang jelas aku suka kalian berdua ya!</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide4">
+            <p><span class="highlight">Jangan kasih tau atau liatin ke siapapun ya</span>, aku malu banget 🫣</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <p>Jadi yaudah deh, itu aja yang aku mau bilang. Sekali lagi selamat hari Valentine ya cantik! Aku bakal terus merawat rasa ini, nggak bakal move on! 😊</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="showFinalEffect()">TAMPILKAN KEJUTAN! 💘</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MUSIK -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/01/15/20220115%20122912.mp3?filename=happy-piano-100-bpm-120240.mp3" type="audio/mpeg">
+    
+    <button class="music-btn" onclick="toggleMusic()">🎵 NYALAKAN MUSIK!</button>
+
+    <!-- EFEK AKHIR -->
+    <div class="final-effect" id="finalEffect"></div>
+
+    <script>
+        // NAVIGASI SLIDE 100% BERFUNGSI
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide${n}`).classList.add('active');
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            showSlide(currentSlide);
+        }
+
+        // MUSIK KONTROL
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play();
+                event.target.textContent = "🔊 MUSIK NYALA!";
+            } else {
+                music.pause();
+                event.target.textContent = "🎵 NYALAKAN MUSIK!";
+            }
+        }
+
+        // BUAT HIASAN GLOBAL
+        function createDecor() {
+            const decorContainer = document.getElementById('globalDecor');
+            const emojis = ['💖', '🌸', '✨', '💘', '🌹', '⭐', '🎀', '🌈'];
+            for (let i = 0; i < 50; i++) {
+                const decor = document.createElement('div');
+                decor.classList.add('decor-item');
+                decor.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                decor.style.left = `${Math.random() * 100}%`;
+                decor.style.animationDelay = `${Math.random() * 10}s`;
+                decorContainer.appendChild(decor);
+            }
+        }
+
+        // EFEK AKHIR SUPER MERIAH
+        function showFinalEffect() {
+            const effectContainer = document.getElementById('finalEffect');
+            effectContainer.style.display = 'block';
+            const emojis = ['💘', '💖', '💝', '💋', '❣️'];
+            for (let i = 0; i < 100; i++) {
+                const item = document.createElement('div');
+                item.classList.add('final-item');
+                item.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDelay = `${Math.random() * 10}s`;
+                effectContainer.appendChild(item);
+            }
+        }
+
+        // JALANKAN SEMUA HIASAN
+        window.onload = function() {
+            createDecor();
+        };
+    </script>
+</body>
+</html>
