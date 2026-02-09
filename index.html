@@ -7,7 +7,6 @@
     <style>
         * {
             margin: 0;
-            padding: 0
             padding: 0;
             box-sizing: border-box;
             font-family: 'Comic Sans MS', 'Segoe UI', cursive;
@@ -16,6 +15,8 @@
         body {
             overflow-x: hidden;
             padding: 10px;
+            background: url('https://cdn.pixabay.com/photo/2020/09/04/19/11/background-5542270_1280.jpg') no-repeat center fixed;
+            background-size: cover;
         }
 
         /* INTRO SUPER MERIAH */
@@ -25,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #ffe6f2 0%, #ffd1dc 100%);
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffd1dc 50%, #ffb3d9 100%);
             z-index: 999;
             display: flex;
             align-items: center;
@@ -34,51 +35,26 @@
         }
 
         .intro-title {
-            font-size: 3.5rem !important;
+            font-size: 3.8rem !important;
             color: #ff0080;
-            text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff0080;
+            text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff0080, 0 0 60px #ff69b4;
             text-align: center;
             line-height: 1.5;
         }
 
         .intro-emoji {
             position: absolute;
-            font-size: 50px;
-            animation: intro-float 6s ease-in-out infinite;
+            font-size: 60px;
+            animation: intro-float 5s ease-in-out infinite;
         }
 
         @keyframes intro-float {
             0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-30px) rotate(15deg); }
+            50% { transform: translateY(-40px) rotate(20deg); }
         }
 
         @keyframes intro-fade {
             to { opacity: 0; visibility: hidden; }
-        }
-
-
-        /* BACKGROUND HALAMAN FULL HIASAN */
-        .bg-decoration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .decor-item {
-            position: absolute;
-            font-size: 30px;
-            animation: float 15s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
 
@@ -91,15 +67,17 @@
             z-index: 10;
         }
 
-        /* SETIAP SLIDE ADA BACKGROUND KHUSUS */
+        /* SETIAP SLIDE ADA BACKGROUND & HIASAN KHUSUS */
         .slide {
             display: none;
+            padding: 60px 35px;
+            border-radius: 35px;
+            margin-bottom: 35px;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.7);
             background-size: cover !important;
             background-position: center !important;
-            padding: 50px 30px;
-            border-radius: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+            background-blend-mode: overlay !important;
+            background-color: rgba(255, 255, 255,  255, 0.9) !important;
         }
 
         .slide.active {
@@ -112,42 +90,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* BACKGROUND UNIK SETIAP SLIDE */
-        #slide1 {
-            background: url('https://cdn.pixabay.com/photo/2020/09/18/19/20/rose-5581735_1280.jpg');
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        #slide2 {
-            background: url('https://cdn.pixabay.com/photo/2018/01/28/15/29/star-3113780_1280.jpg');
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        #slide3 {
-            background: url('https://cdn.pixabay.com/photo/2017/08/30/09/09/flowers-2696848_1280.jpg');
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        #slide4 {
-            background: url('https://cdn.pixabay.com/photo/2015/09/18/19/18/moon-947963_1280.jpg');
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        #slide5 {
-            background: url('https://cdn.pixabay.com/photo/2020/05/03/19/54/heart-5129709_1280.jpg');
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
+        /* BACKGROUND UNIK TIAP SLIDE */
+        #slide1 { background: url('https://cdn.pixabay.com/photo/2020/09/18/19/20/rose-5581736_1280.jpg') !important; }
+        #slide2 { background: url('https://cdn.pixabay.com/photo/2018/01/28/15/20/star-3113979_1280.jpg') !important; }
+        #slide3 { background: url('https://cdn.pixabay.com/photo/2017/08/30/09/09/flowers-2696848_1280.jpg') !important; }
+        #slide4 { background: url('https://cdn.pixabay.com/photo/2015/09/18/19/18/moon-947963_1280.jpg') !important; }
+        #slide5 { background: url('https://cdn.pixabay.com/photo/2020/05/03/19/54/heart-5129709_1280.jpg') !important; }
 
 
-        /* TULISAN BESAR DI SETIAP SLIDE */
+        /* TULISAN BESAR & JELAS */
         .slide p {
-            font-size: 1.5rem !important;
-            line-height: 2.2;
+            font-size: 1.7rem !important;
+            line-height: 2.3;
             color: #333;
             text-align: center;
             font-weight: bold;
@@ -156,7 +110,7 @@
 
         .highlight {
             color: #ff0080;
-            font-size: 1.7rem !important;
+            font-size: 1.9rem !important;
             text-shadow: 0 0 15px #ff69b4;
         }
 
@@ -165,7 +119,7 @@
         .nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             margin-top: 40px;
         }
 
@@ -173,18 +127,18 @@
             background: linear-gradient(45deg, #ff69b4, #ff0080);
             color: white;
             border: none;
-            padding: 20px 35px;
-            border-radius: 40px;
-            font-size: 1.4rem !important;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem !important;
             font-weight: bold;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
             transition: all 0.3s ease;
         }
 
         .nav-btn:hover {
             background: linear-gradient(45deg, #ff0080, #ff69b4);
             transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+            box-shadow: 0 0 35px rgba(255, 105, 180, 0.8);
         }
 
 
@@ -197,59 +151,81 @@
             background: linear-gradient(45deg, #ff69b4, #ff0080);
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+            padding: 18px 30px;
+            border-radius: 40px;
+            font-size: 1.3rem !important;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
 
 
-        /* EFEK KERTAS KEMARIN */
-        .confetti {
+        /* EFEK HIASAN GLOBAL */
+        .global-decor {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             z-index: 5;
             pointer-events: none;
-            display: none;
         }
 
-        .confetti-item {
+        .decor-item {
             position: absolute;
-            font-size: 35px;
-            animation: confetti-fall 8s linear infinite;
+            font-size: 40px;
+            animation: float 12s linear infinite;
         }
 
-        @keyframes confetti-fall {
-            0% { transform: translateY(-10vh) rotate(0); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0); opacity: 1; }
+            50% { transform: translateY(-50px) rotate(15deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+
+        /* EFEK KHUSUS AKHIR */
+        .final-effect {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 8;
+            display: none;
+            pointer-events: none;
+        }
+
+        .final-item {
+            position: absolute;
+            font-size: 50px;
+            color: #ff0080;
+            animation: final-float 10s linear infinite;
+        }
+
+        @keyframes final-float {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- BACKGROUND HIASAN -->
-    <div class="bg-decoration" id="bgDecor"></div>
-
-    <!-- EFEK KERTAS -->
-    <div class="confetti" id="confetti"></div>
-
-    <!-- INTRO -->
+    <!-- INTRO SECTION -->
     <div class="intro-section">
-        <div class="intro-title">💖 HAI BULAN 🌙✨<br>INI UNTUK KAMU! 💖</div>
-        <div class="intro-emoji" style="left: 10%; animation-delay: 0s;">💖</div>
-        <div class="intro-emoji" style="left: 20%; animation-delay: 0.5s;">🌸</div>
-        <div class="intro-emoji" style="left: 30%; animation-delay: 1s;">✨</div>
-        <div class="intro-emoji" style="left: 40%; animation-delay: 1.5s;">🌙</div>
-        <div class="intro-emoji" style="left: 50%; animation-delay: 2s;">🌹</div>
-        <div class="intro-emoji" style="left: 60%; animation-delay: 2.5s;">⭐</div>
-        <div class="intro-emoji" style="left: 70%; animation-delay: 3s;">💘</div>
-        <div class="intro-emoji" style="left: 80%; animation-delay: 3.5s;">🎀</div>
-        <div class="intro-emoji" style="left: 90%; animation-delay: 4s;">🌈</div>
+        <div class="intro-title">💖 HAI BULAN 🌙✨<br>SURPRISE DARI AKU! 💖</div>
+        <div class="intro-emoji" style="left: 5%; animation-delay: 0s;">💖</div>
+        <div class="intro-emoji" style="left: 15%; animation-delay: 0.5s;">🌸</div>
+        <div class="intro-emoji" style="left: 25%; animation-delay: 1s;">✨</div>
+        <div class="intro-emoji" style="left: 35%; animation-delay: 1.5s;">🌙</div>
+        <div class="intro-emoji" style="left: 45%; animation-delay: 2s;">🌹</div>
+        <div class="intro-emoji" style="left: 55%; animation-delay: 2.5s;">⭐</div>
+        <div class="intro-emoji" style="left: 65%; animation-delay: 3s;">💘</div>
+        <div class="intro-emoji" style="left: 75%; animation-delay: 3.5s;">🎀</div>
+        <div class="intro-emoji" style="left: 85%; animation-delay: 4s;">🌈</div>
     </div>
 
-    <!-- SLIDE UTAMA DENGAN TEKS SESUAI YANG KAMU MAU! -->
+    <!-- GLOBAL HIASAN -->
+    <div class="global-decor" id="globalDecor"></div>
+
+    <!-- SLIDE UTAMA -->
     <div class="slide-wrapper">
-        <!-- SLIDE 1 -->
         <div class="slide active" id="slide1">
             <p>Hai cantik... Udah buka belum? 😊 Kalau udah buka berarti hadiahnya udah sampe ya!</p>
             <div class="nav-buttons">
@@ -257,25 +233,22 @@
             </div>
         </div>
 
-        <!-- SLIDE 2 -->
         <div class="slide" id="slide2">
-            <p>Emmm... Selamat Hari Valentine ya! Maaf ya aku gak nepati janji – padahal waktu itu udah janji gak bakal kasih apa-apa pas Valentine. Oh iya, btw suka gak sama hadiahnya?</p>
+            <p>Emmm... Selamat Hari Valentine ya! Maaf ya aku gak nepati janji – padahal udah janji gak kasih apa-apa. Oh iya, suka gak sama hadiahnya?</p>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
                 <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
             </div>
         </div>
 
-        <!-- SLIDE 3 -->
         <div class="slide" id="slide3">
-            <p>Emm jujur aja, sampe sekarang aku masih belum tahu kenapa suka sama kamu – soalnya kalian kan kembar, cuma beda satu <span class="highlight">Bulan</span> dan satunya <span class="highlight">Bintang</span> aja, jadi kadang aku masih bingung mana yang pertama aku suka, tapi yang jelas aku suka sama kalian berdua ya hehe. Tapi semoga dengan hadiah Valentine ini dan surat kecil ini, rasa suka yang ada di hati aku bisa terus tumbuh dan lama kelamaan bisa sampai ke kalian. Oiya maaf juga ya buat sekitar 2 bulan terakhir ini aku sering chat kamu dan mungkin juga sering ganggu – kalau kamu merasa risih atau terganggu, aku bener-bener minta maaf ya!</p>
+            <p>Emm jujur aja, aku masih belum tahu kenapa suka sama kamu – kalian kan kembar, cuma beda satu <span class="highlight">Bulan</span> sama <span class="highlight">Bintang</span> aja, tapi yang jelas aku suka kalian berdua ya!</p>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
                 <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
             </div>
         </div>
 
-        <!-- SLIDE 4 -->
         <div class="slide" id="slide4">
             <p><span class="highlight">Jangan kasih tau atau liatin ke siapapun ya</span>, aku malu banget 🫣</p>
             <div class="nav-buttons">
@@ -284,39 +257,26 @@
             </div>
         </div>
 
-        <!-- SLIDE 5 -->
         <div class="slide" id="slide5">
-            <p>Jadi yaudah sih itu aja yang aku mau bilang. Sekali lagi selamat hari Valentine ya cantik! Oiya jujur aku malu banget buat bilang semua ini langsung ke kamu, tapi yaudah deh harus berani kan? 😅 Dan karena aku sendiri belum jelas kenapa suka, aku bakal tetep suka aja deh – mungkin kalian belum mungkin suka sama aku, tapi gapapa, aku bakal tetap ada di sini kayak gini terus merawat rasa ini biar bisa terus tumbuh, nggak bakal move on! hehehe</p>
+            <p>Jadi yaudah deh, itu aja yang aku mau bilang. Sekali lagi selamat hari Valentine ya cantik! Aku bakal terus merawat rasa ini, nggak bakal move on! 😊</p>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
-                <button class="nav-btn" onclick="showConfetti()">TAMPILKAN CINTAKU! 💘</button>
+                <button class="nav-btn" onclick="showFinalEffect()">TAMPILKAN KEJUTAN! 💘</button>
             </div>
         </div>
     </div>
 
     <!-- MUSIK -->
-    <audio id="music" loop>
+    <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/01/15/20220115%20122912.mp3?filename=happy-piano-100-bpm-120240.mp3" type="audio/mpeg">
     
     <button class="music-btn" onclick="toggleMusic()">🎵 NYALAKAN MUSIK!</button>
 
-    <script>
-        // BUAT BACKGROUND HIASAN
-        const bgDecor = document.getElementById('bgDecor');
-        const decors = ['💖', '🌸', '✨', '💘', '🌹', '⭐', '🎀', '🌈', '💝', '💋'];
-        
-        setInterval(() => {
-            const decor = document.createElement('div');
-            decor.classList.add('decor-item');
-            decor.textContent = decors[Math.floor(Math.random() * decors.length)];
-            decor.style.left = `${Math.random() * 100}%`;
-            decor.style.animationDelay = `${Math.random() * 5}s`;
-            decor.style.animationDuration = `${10 + Math.random() * 15}s`;
-            bgDecor.appendChild(decor);
-            setTimeout(() => decor.remove(), 25000);
-        }, 300);
+    <!-- EFEK AKHIR -->
+    <div class="final-effect" id="finalEffect"></div>
 
-        // NAVIGASI SLIDE
+    <script>
+        // NAVIGASI SLIDE 100% BERFUNGSI
         let currentSlide = 1;
         const totalSlides = 5;
 
@@ -327,18 +287,18 @@
         }
 
         function nextSlide() {
-            const next = currentSlide === totalSlides ? 1 : currentSlide + 1;
-            showSlide(next);
+            currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            showSlide(currentSlide);
         }
 
         function prevSlide() {
-            const prev = currentSlide === 1 ? totalSlides : currentSlide - 1;
-            showSlide(prev);
+            currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            showSlide(currentSlide);
         }
 
-        // MUSIK
+        // MUSIK KONTROL
         function toggleMusic() {
-            const music = document.getElementById('music');
+            const music = document.getElementById('bgMusic');
             if (music.paused) {
                 music.play();
                 event.target.textContent = "🔊 MUSIK NYALA!";
@@ -348,7 +308,39 @@
             }
         }
 
-        // EFEK KERTAS
-        function showConfetti() {
-            const confetti = document.getElementById('confetti');
-            confetti
+        // BUAT HIASAN GLOBAL
+        function createDecor() {
+            const decorContainer = document.getElementById('globalDecor');
+            const emojis = ['💖', '🌸', '✨', '💘', '🌹', '⭐', '🎀', '🌈'];
+            for (let i = 0; i < 50; i++) {
+                const decor = document.createElement('div');
+                decor.classList.add('decor-item');
+                decor.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                decor.style.left = `${Math.random() * 100}%`;
+                decor.style.animationDelay = `${Math.random() * 10}s`;
+                decorContainer.appendChild(decor);
+            }
+        }
+
+        // EFEK AKHIR SUPER MERIAH
+        function showFinalEffect() {
+            const effectContainer = document.getElementById('finalEffect');
+            effectContainer.style.display = 'block';
+            const emojis = ['💘', '💖', '💝', '💋', '❣️'];
+            for (let i = 0; i < 100; i++) {
+                const item = document.createElement('div');
+                item.classList.add('final-item');
+                item.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDelay = `${Math.random() * 10}s`;
+                effectContainer.appendChild(item);
+            }
+        }
+
+        // JALANKAN SEMUA HIASAN
+        window.onload = function() {
+            createDecor();
+        };
+    </script>
+</body>
+</html>
