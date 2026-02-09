@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌙 SURPRISE UNTUK BULAN! 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        /* ================== STYLE KHUSUS BULAN ================== */
+        body {
+            background: url('https://cdn.pixabay.com/photo/2018/08/14/13/23/moon-3605242_1280.jpg') no-repeat center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .intro {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(135deg, #f3e5f5 0%, #d1c4e9 50%, #b39ddb 100%);
+            z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            animation: intro-hilang 1s ease 8s forwards;
+        }
+
+        .intro-judul {
+            font-size: 4rem;
+            color: #673ab7;
+            text-align: center;
+            text-shadow: 0 0 20px #9575cd, 0 0 40px #512da8;
+        }
+
+        .intro-ornamen {
+            position: absolute;
+            font-size: 60px;
+            color: #673ab7;
+            animation: float-intro 6s ease-in-out infinite;
+        }
+
+        @keyframes float-intro {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        @keyframes intro-hilang {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .slide-container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding-top: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide {
+            display: none;
+            padding: 50px 30px;
+            border-radius: 40px;
+            margin-bottom: 30px;
+            background: url('https://cdn.pixabay.com/photo/2017/07/29/00/40/moon-2551447_1280.jpg') no-repeat center;
+            background-size: cover;
+            background-blend-mode: overlay;
+            background-color: rgba(255,255,255,0.85);
+            border: 5px solid #9575cd;
+            box-shadow: 0 0 30px rgba(149, 117, 205, 0.7);
+        }
+
+        .slide.active {
+            display: block;
+            animation: muncul-slide 0.8s ease forwards;
+        }
+
+        @keyframes muncul-slide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide p {
+            font-size: 1.8rem;
+            color: #333;
+            text-align: center;
+            line-height: 2.5;
+            font-weight: bold;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .highlight {
+            font-size: 2rem;
+            color: #673ab7;
+            font-weight: bolder;
+            text-shadow: 0 0 15px #9575cd;
+        }
+
+        .tombol-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tombol {
+            background: linear-gradient(45deg, #9575cd, #673ab7);
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(149, 117, 205, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .tombol:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(149, 117, 205, 1);
+        }
+
+        .ornamen-latar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .ornamen-item {
+            position: absolute;
+            font-size: 30px;
+            color: #673ab7;
+            animation: float-ornamen 15s linear infinite;
+        }
+
+        @keyframes float-ornamen {
+            0% { transform: translateY(100vh) rotate(0); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .efek-akhir {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 15;
+            display: none;
+            pointer-events: none;
+        }
+
+        .efek-item {
+            position: absolute;
+            font-size: 50px;
+            color: #673ab7;
+            animation: float-efek 10s linear infinite;
+        }
+
+        @keyframes float-efek {
+            0% { transform: translateY(-10vh) rotate(0); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .tombol-musik {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            z-index: 20;
+            background: linear-gradient(45deg, #9575cd, #673ab7);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(149, 117, 205, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- INTRO BULAN -->
+    <div class="intro">
+        <div class="intro-judul">🌙 HAI BULAN! 💖<br>SURPRISE UNTUKMU!</div>
+        <div class="intro-ornamen" style="left: 10%; animation-delay: 0s;">🌙</div>
+        <div class="intro-ornamen" style="left: 20%; animation-delay: 0.5s;">💜</div>
+        <div class="intro-ornamen" style="left: 30%; animation-delay: 1s;">✨</div>
+        <div class="intro-ornamen" style="left: 70%; animation-delay: 1.5s;">💜</div>
+        <div class="intro-ornamen" style="left: 80%; animation-delay: 2s;">🌙</div>
+        <div class="intro-ornamen" style="left: 90%; animation-delay: 2.5s;">✨</div>
+    </div>
+
+    <!-- ORNAMEN LATAR BULAN -->
+    <div class="ornamen-latar" id="ornamenLatar"></div>
+
+    <!-- SLIDE UTAMA (TEKS KHUSUS BULAN) -->
+    <div class="slide-container">
+        <div class="slide active" id="slide1">
+            <p>Hai cantik <span class="highlight">BULAN!</span> 😊 Udah buka belum surprise ku?</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide2">
+            <p>Selamat Hari Valentine ya! Maaf ya kalau aku gak bisa ngepati janji <span class="highlight">gak kasih apa-apa</span>...</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="prevSlide()">← KEMBALI</button>
+                <button class="tombol" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <p>Emm jujur aja, aku masih belum tahu kenapa suka sama kamu – kalian kan kembar, cuma beda nama <span class="highlight">BULAN</span> sama <span class="highlight">BINTANG</span> aja!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="prevSlide()">← KEMBALI</button>
+                <button class="tombol" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide4">
+            <p><span class="highlight">Jangan kasih tau atau kasih liat ke siapapun ya</span>, aku malu banget 🫣</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="prevSlide()">← KEMBALI</button>
+                <button class="tombol" onclick="nextSlide()">LANJUT →</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <p>Itu aja sih yang aku mau bilang. Selamat Valentine ya <span class="highlight">BULAN!</span> Aku bakal terus cinta kamu berdua!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="prevSlide()">← KEMBALI</button>
+                <button class="tombol" onclick="tampilkanEfekAkhir()">TAMPILKAN CINTAKU! 💘</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MUSIK -->
+    <audio id="musik" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/02/26/20220226%201538-10324.mp3?filename=relaxing-piano-10324.mp3" type="audio/mpeg">
+    
+    <button class="tombol-musik" onclick="toggleMusik()">🎵 NYALAKAN MUSIK!</button>
+
+    <script>
+        // NAVIGASI SLIDE
+        let slideSekarang = 1;
+        const totalSlide = 5;
+
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide${n}`).classList.add('active');
+            slideSekarang = n;
+        }
+
+        function nextSlide() {
+            slideSekarang = slideSekarang === totalSlide ? 1 : slideSekarang + 1;
+            showSlide(slideSekarang);
+        }
+
+        function prevSlide() {
+            slideSekarang = slideSekarang === 1 ? totalSlide : slideSekarang - 1;
+            showSlide(slideSekarang);
+        }
+
+        // MUSIK
+        function toggleMusik() {
+            const musik = document.getElementById('musik');
+            if (musik.paused) {
+                musik.play();
+                document.querySelector('.tombol-musik').textContent = '🔊 MUSIK NYALA!';
+            } else {
+                musik.pause();
+                document.querySelector('.tombol-musik').textContent = '🎵 NYALAKAN MUSIK!';
+            }
+        }
+
+        // EFEK AKHIR
+        function tampilkanEfekAkhir() {
+            const efek = document.createElement('div');
+            efek.className = 'efek-akhir';
+            document.body.appendChild(efek);
+            
+            for (let i = 0; i < 100; i++) {
+                const item = document.createElement('div');
+                item.className = 'efek-item';
+                item.textContent = '🌙';
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDelay = `${Math.random() * 10}s`;
+                efek.appendChild(item);
+            }
+        }
+
+        // BUAT ORNAMEN LATAR
+        window.onload = function() {
+            const latar = document.getElementById('ornamenLatar');
+            const ornamen = ['🌙', '💜', '✨'];
+            
+            for (let i = 0; i < 50; i++) {
+                const item = document.createElement('div');
+                item.className = 'ornamen-item';
+                item.textContent = ornamen[Math.floor(Math.random() * ornamen.length)];
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDelay = `${Math.random() * 15}s`;
+                latar.appendChild(item);
+            }
+        };
+    </script>
+</body>
+</html>
+
