@@ -2,222 +2,354 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise Untuk Bulan! 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>💖 SURPRISE UNTUK BULAN! ✨</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
         }
 
-        /* Animasi Emoji Awal */
-        .emoji-intro {
+        body {
+            background: linear-gradient(135deg, #ffe6f2 20%, #ffd1dc 50%, #ffb3d9 80%);
+            overflow-x: hidden;
+            padding: 10px;
+        }
+
+        /* INTRO SUPER BESAR & TENGAH */
+        .intro-section {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
             background-color: #ffe6f2;
-            z-index: 10;
+            z-index: 999;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: fade-out 0.5s ease 5s forwards;
-        }
-
-        .emoji {
-            position: absolute;
-            font-size: 35px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(36deg); opacity: 0; }
-        }
-
-        @keyframes fade-out {
-            to { opacity: 0; visibility: hidden; }
+            animation: intro-fadeout 1s ease 7s forwards;
         }
 
         .intro-title {
-            font-size: 2rem;
-            color: #ff69b4;
+            font-size: 2.8rem; /* BESAR DI HP! */
+            color: #ff0080;
+            text-shadow: 0 0 15px #ff69b4, 0 0 30px #ff0080, 0 0 45px #ff3399;
+            text-align: center;
+            padding: 0 10px;
             opacity: 0;
-            animation: show-title 1s ease 3s forwards;
+            animation: intro-pop 1.5s ease 3.5s forwards;
         }
 
-        @keyframes show-title {
-            to { opacity: 1; }
+        .intro-emoji {
+            position: absolute;
+            font-size: 50px; /* EMOJI LEBIH BESAR */
+            animation: intro-float 6s ease-in-out infinite;
         }
 
-        /* Halaman Slide Utama */
-        body {
-            background-color: #ffe6f2;
-            padding: 20px;
+        @keyframes intro-float {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            20% { opacity: 1; scale: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(45deg) scale(0.5); opacity: 0; }
         }
 
-        .slide-container {
-            max-width: 600px;
+        @keyframes intro-fadeout {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes intro-pop {
+            to { opacity: 1; transform: scale(1.1); }
+        }
+
+
+        /* PARTIKEL SELALU BERGERAK */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 25px;
+            animation: particle-drift 12s linear infinite;
+        }
+
+        @keyframes particle-drift {
+            0% { transform: translate(calc(-50vw), 100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(calc(150vw), -100vh) rotate(72deg); opacity: 0; }
+        }
+
+
+        /* SLIDE UTAMA BESAR & TENGAH */
+        .slide-wrapper {
+            max-width: 90%; /* SESUAI UKURAN HP */
             margin: 0 auto;
-            padding-top: 30px;
+            padding-top: 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .slide {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
-            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.5), 
+                        0 0 50px rgba(255, 105, 180, 0.3);
             display: none;
             opacity: 0;
             transform: translateY(20px);
-            animation: slide-in 0.8s ease forwards;
-        }
-
-        @keyframes slide-in {
-            to { opacity: 1; transform: translateY(0); }
+            animation: slide-appear 0.8s ease forwards;
         }
 
         .slide.active {
             display: block;
         }
 
-        .slide h1, .slide h2 {
-            color: #ff69b4;
+        @keyframes slide-appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide h2 {
+            color: #ff0080;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px #ff69b4;
+        }
+
+        .slide p {
+            font-size: 1.3rem; /* TULISAN BESAR DI HP */
+            line-height: 2;
+            color: #333;
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .slide p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #333;
-            text-align: left;
-        }
-
-        .highlight {
-            font-style: italic;
+        .highlight-text {
+            color: #ff0080;
             font-weight: bold;
-            color: #ff69b4;
+            text-shadow: 0 0 5px #ff69b4;
         }
 
-        /* Tombol Navigasi */
+
+        /* TOMBOL BESAR & MENARIK */
         .nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 25px;
             margin-top: 20px;
         }
 
-        button {
-            background-color: #ff69b4;
+        .nav-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff0080);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #ff0080, #ff69b4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+
+
+        /* MUSIC CONTROL */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+
+        .music-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff0080);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
             font-size: 1rem;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
         }
 
-        button:hover {
-            background-color: #ff4da6;
+
+        /* ANIMASI HATI TERBANG DI AKHIR */
+        .floating-hearts {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 5;
+            pointer-events: none;
+            display: none;
         }
 
-        /* Responsif untuk HP */
-        @media (max-width: 500px) {
-            .intro-title { font-size: 1.5rem; }
-            .slide { padding: 20px; }
-            .slide p { font-size: 0.9rem; }
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: #ff0080;
+            animation: heart-float 8s ease-in-out infinite;
+        }
+
+        @keyframes heart-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- Animasi Emoji Awal -->
-    <div class="emoji-intro">
-        <div class="emoji" style="left: 10%; animation-delay: 0s;">💖</div>
-        <div class="emoji" style="left: 20%; animation-delay: 0.5s;">🌸</div>
-        <div class="emoji" style="left: 30%; animation-delay: 1s;">🦋</div>
-        <div class="emoji" style="left: 40%; animation-delay: 1.5s;">✨</div>
-        <div class="emoji" style="left: 50%; animation-delay: 2s;">🌙</div>
-        <div class="emoji" style="left: 60%; animation-delay: 2.5s;">🌹</div>
-        <div class="emoji" style="left: 70%; animation-delay: 3s;">⭐</div>
-        <div class="emoji" style="left: 80%; animation-delay: 3.5s;">💘</div>
-        <div class="intro-title">💖 HAI Bulan 🌙✨, INI UNTUK KAMU! 💖</div>
+    <!-- INTRO SECTION -->
+    <div class="intro-section" id="intro">
+        <div class="intro-emoji" style="left: 5%; animation-delay: 0s;">💖</div>
+        <div class="intro-emoji" style="left: 15%; animation-delay: 0.5s;">🌸</div>
+        <div class="intro-emoji" style="left: 25%; animation-delay: 1s;">🦋</div>
+        <div class="intro-emoji" style="left: 35%; animation-delay: 1.5s;">✨</div>
+        <div class="intro-emoji" style="left: 45%; animation-delay: 2s;">🌙</div>
+        <div class="intro-emoji" style="left: 55%; animation-delay: 2.5s;">🌹</div>
+        <div class="intro-emoji" style="left: 65%; animation-delay: 3s;">⭐</div>
+        <div class="intro-emoji" style="left: 75%; animation-delay: 3.5s;">💘</div>
+        <div class="intro-emoji" style="left: 85%; animation-delay: 4s;">🎀</div>
+        <div class="intro-title">💖 HAI BULAN 🌙✨, INI UNTUK KAMU! 💖</div>
     </div>
 
-    <!-- Slide Paragraf -->
-    <div class="slide-container">
+    <!-- PARTIKEL CONTAINER -->
+    <div class="particle-container" id="particles"></div>
+
+    <!-- MUSIC PLAYER -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/01/15/20220115%20122912.mp3?filename=happy-piano-100-bpm-120240.mp3" type="audio/mpeg">
+    
+
+    <!-- SLIDE CONTENT -->
+    <div class="slide-wrapper" id="slideWrapper">
+        <!-- SLIDE 1 -->
         <div class="slide active" id="slide1">
-            <p>Hai cantik... Udah buka belum? 😊 Kalau udah buka berarti hadiahnya udah sampe ya!</p>
+            <p>Hai cantik <span class="highlight-text">Bulan!</span> 😊 Udah siap lihat kejutan dari aku?</p>
             <div class="nav-buttons">
-                <button onclick="nextSlide()">Lanjut →</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
             </div>
         </div>
 
+        <!-- SLIDE 2 -->
         <div class="slide" id="slide2">
-            <p>Emmm... Selamat Hari Valentine ya! Maaf ya aku gak nepati janji – padahal waktu itu udah janji gak bakal kasih apa-apa pas Valentine. Oh iya, btw suka gak sama hadiahnya?</p>
+            <p>Maafin ya kalau aku sering jadi bikin kamu bingung, tapi aku selalu punya maksud baik lho! 😘</p>
             <div class="nav-buttons">
-                <button onclick="prevSlide()">← Sebelumnya</button>
-                <button onclick="nextSlide()">Lanjut →</button>
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
             </div>
         </div>
 
+        <!-- SLIDE 3 -->
         <div class="slide" id="slide3">
-            <p>Emm jujur aja, sampe sekarang aku masih belum tahu kenapa suka sama kamu – soalnya kalian kan kembar, cuma beda satu <span class="highlight">Bulan</span> dan satunya <span class="highlight">Bintang</span> aja, jadi kadang aku masih bingung mana yang pertama aku suka, tapi yang jelas aku suka sama kalian berdua ya hehe. Tapi semoga dengan hadiah Valentine ini dan surat kecil ini, rasa suka yang ada di hati aku bisa terus tumbuh dan lama kelamaan bisa sampai ke kalian. Oiya maaf juga ya buat sekitar 2 bulan terakhir ini aku sering chat kamu dan mungkin juga sering ganggu – kalau kamu merasa risih atau terganggu, aku bener-bener minta maaf ya!</p>
+            <p>Kamu tau nggak sih, kamu itu spesial banget buat aku! Seperti <span class="highlight-text">bulan</span> yang bikin malam jadi cantik ✨</p>
             <div class="nav-buttons">
-                <button onclick="prevSlide()">← Sebelumnya</button>
-                <button onclick="nextSlide()">Lanjut →</button>
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="nextSlide()">LANJUT →</button>
             </div>
         </div>
 
+        <!-- SLIDE 4 (AKHIR MERIAH!) -->
         <div class="slide" id="slide4">
-            <p class="highlight">Jangan kasih tau atau liatin ke siapapun ya, aku malu banget 🫣</p>
+            <p>Terima kasih ya udah jadi bagian dari hidupku, aku cinta kamu banyak-banyak! 💖</p>
             <div class="nav-buttons">
-                <button onclick="prevSlide()">← Sebelumnya</button>
-                <button onclick="nextSlide()">Lanjut →</button>
-            </div>
-        </div>
-
-        <div class="slide" id="slide5">
-            <p>Jadi yaudah sih itu aja yang aku mau bilang. Sekali lagi selamat hari Valentine ya cantik! Oiya jujur aku malu banget buat bilang semua ini langsung ke kamu, tapi yaudah deh harus berani kan? 😅 Dan karena aku sendiri belum jelas kenapa suka, aku bakal tetep suka aja deh – mungkin kalian belum mungkin suka sama aku, tapi gapapa, aku bakal tetap ada di sini kayak gini terus merawat rasa ini biar bisa terus tumbuh, nggak bakal move on! hehehe</p>
-            <div class="nav-buttons">
-                <button onclick="prevSlide()">← Sebelumnya</button>
+                <button class="nav-btn" onclick="prevSlide()">← KEMBALI</button>
+                <button class="nav-btn" onclick="showHearts()">TAMPILKAN CINTAKU! 💘</button>
             </div>
         </div>
     </div>
+
+    <!-- FLOATING HEARTS -->
+    <div class="floating-hearts" id="hearts"></div>
 
     <script>
-        // Navigasi Slide
-        let currentSlide = 1;
-        const totalSlides = 5;
-
-        function showSlide(n) {
-            document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
-            document.getElementById(`slide${n}`).classList.add('active');
-            currentSlide = n;
+        // Buat Intro Emoji Banyak
+        const intro = document.getElementById('intro');
+        for (let i = 0; i < 15; i++) {
+            const emoji = document.createElement('div');
+            emoji.classList.add('intro-emoji');
+            const emojis = ['💖', '🌸', '🦋', '✨', '🌙', '🌹', '⭐', '💘', '🎀', '💝', '💋', '💌', '🔔', '🎉', '🌈'];
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = `${Math.random() * 100}%`;
+            emoji.style.animationDelay = `${Math.random() * 5}s`;
+            intro.appendChild(emoji);
         }
 
+        // Buat Partikel Selalu Bergerak
+        function createParticles() {
+            const container = document.getElementById('particles');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const emojis = ['💖', '🌸', '✨', '💘', '⭐', '🦋'];
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animation = `particle-drift ${Math.random() * 10 + 5}s linear infinite`;
+                container.appendChild(particle);
+                setTimeout(() => particle.remove(), 15000);
+            }, 300);
+        }
+
+        // Music Otomatis Play
+        const bgMusic = document.getElementById('bgMusic');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cek izin audio di browser baru mainkan
+            document.body.addEventListener('click', () => {
+                bgMusic.play().catch(err => console.log('Izin musik belum diberikan:', err));
+            }, { once: true });
+        });
+
+        // Navigasi Slide
+        let currentSlide = 1;
+        const totalSlides = 4;
+
         function nextSlide() {
-            const next = currentSlide === totalSlides ? 1 : currentSlide + 1;
-            showSlide(next);
+            document.getElementById(`slide${currentSlide}`).classList.remove('active');
+            currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
         }
 
         function prevSlide() {
-            const prev = currentSlide === 1 ? totalSlides : currentSlide - 1;
-            showSlide(prev);
+            document.getElementById(`slide${currentSlide}`).classList.remove('active');
+            currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
         }
 
-        // Tampilkan slide pertama setelah intro selesai
-        setTimeout(() => {
-            showSlide(1);
-        }, 5500);
+        // Animasi Hati di Akhir
+        function showHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.style.display = 'block';
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = '💘';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 10}s`;
+                heart.style.animation = `heart-float ${Math.random() * 10 + 5}s linear infinite`;
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Jalankan Partikel
+        createParticles();
     </script>
 </body>
-  </html>
-
+</html>
