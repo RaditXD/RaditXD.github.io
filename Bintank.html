@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ SURPRISE UNTUK BINTANG! 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        /* ================== WARNA BIRU KHUSUS BINTANG ================== */
+        body {
+            background: url('https://cdn.pixabay.com/photo/2020/05/13/16/49/starry-sky-5167908_1280.jpg') no-repeat center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .intro {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #2196f3 100%);
+            z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            animation: intro-hilang 1s ease 5s forwards;
+        }
+
+        .intro-judul {
+            font-size: 4.5rem;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 0 20px #bbdefb, 0 0 40px #2196f3;
+        }
+
+        .intro-ornamen {
+            position: absolute;
+            font-size: 70px;
+            color: #fff;
+            animation: float-intro 4s ease-in-out infinite;
+        }
+
+        @keyframes float-intro {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        @keyframes intro-hilang {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .slide-container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding-top: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide {
+            display: none;
+            padding: 50px 30px;
+            border-radius: 40px;
+            margin-bottom: 30px;
+            background: url('https://cdn.pixabay.com/photo/2021/08/03/09/04/milky-way-6517623_1280.jpg') no-repeat center;
+            background-size: cover;
+            background-blend-mode: overlay;
+            background-color: rgba(255,255,255,0.8);
+            border: 5px solid #2196f3;
+            box-shadow: 0 0 30px rgba(33, 150, 243, 0.8);
+        }
+
+        .slide.active {
+            display: block;
+            animation: muncul-slide 0.8s ease forwards;
+        }
+
+        @keyframes muncul-slide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide p {
+            font-size: 1.8rem;
+            color: #0d47a1;
+            text-align: center;
+            line-height: 2.8;
+            font-weight: bold;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .highlight {
+            color: #1976d2;
+            font-size: 2rem;
+            text-shadow: 0 0 15px #bbdefb;
+        }
+
+        .tombol-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tombol {
+            background: linear-gradient(45deg, #2196f3, #0d47a1);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .tombol:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(33, 150, 243, 1);
+        }
+
+        .ornamen-latar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .ornamen-item {
+            position: absolute;
+            font-size: 30px;
+            color: #fff;
+            animation: float-ornamen 15s linear infinite;
+        }
+
+        @keyframes float-ornamen {
+            0% { transform: translateY(100vh) rotate(0); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* EFEK AKHIR SLIDE 18 */
+        .slide-akhir {
+            display: none;
+            padding: 80px 30px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #0d47a1 0%, #2196f3 100%);
+            text-align: center;
+            animation: muncul-slide 0.8s ease forwards;
+        }
+
+        .slide-akhir.active {
+            display: block;
+        }
+
+        .slide-akhir p {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 0 20px #bbdefb, 0 0 40px #2196f3;
+            line-height: 3;
+        }
+
+        .emoji-akhir {
+            font-size: 5rem;
+            animation: bounce-emoji 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-emoji {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- INTRO SLIDE 1 -->
+    <div class="intro">
+        <div class="intro-judul">✨ HAI BINTANG<br>INI BUAT KAMU! ✨🌟</div>
+        <div class="intro-ornamen" style="left: 10%;">✨</div>
+        <div class="intro-ornamen" style="left: 25%;">🌟</div>
+        <div class="intro-ornamen" style="left: 75%;">✨</div>
+        <div class="intro-ornamen" style="left: 90%;">🌟</div>
+    </div>
+
+    <!-- ORNAMEN LATAR -->
+    <div class="ornamen-latar" id="ornamenLatar"></div>
+
+    <!-- SLIDE UTAMA -->
+    <div class="slide-container">
+        <!-- SLIDE 2 -->
+        <div class="slide" id="slide2">
+            <p>Udah buka belum? 🤷‍♂️🙎‍♂️❓❓⁉️</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Sudah</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide" id="slide3">
+            <p>Kalau udah buka berarti hadiahnya udah sampe ya?!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Iyaa</button>
+                <button class="tombol" onclick="prevSlide()">kok mau balik???</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide" id="slide4">
+            <p>Selamat Hari Valentine!<br>Maaf ya gak nepati janji – padahal udah janji gak kasih apa-apa.</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">masa balik lagi??</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide" id="slide5">
+            <p>Semoga kamu seneng sama hadiah aku ya! 😁😆😝😜😅🤪</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide" id="slide6">
+            <p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide" id="slide7">
+            <p>Kalian kan kembar, cuma beda <span class="highlight">BINTANG</span> dan <span class="highlight">BULAN</span> aja.<br>Tapi jelas aku suka kalian berdua!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide" id="slide8">
+            <p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu.<br>Kalau risih, aku minta maaf ya!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide" id="slide9">
+            <p>Jangan kasih tau atau liatin ke siapapun ya<br>Aku malu banget!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Iya</button>
+                <button class="tombol" onclick="prevSlide()">iya deh</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="slide" id="slide10">
+            <p>Emmm... 🥺🤔❓</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide" id="slide11">
+            <p>Bintang, kamu mau gak jadi pacarku? 😖👉👈🫠💌💕🫶</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide" id="slide12">
+            <p>Maaf ya tiba-tiba nembak gitu...<br>Aku sendiri juga bingung kenapa tiba-tiba berani bilang begini!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 13 -->
+        <div class="slide" id="slide13">
+            <p>Kalau mau jawab atau cuma beda chat aja,<br>nomor aku masih sama kok</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 14 -->
+        <div class="slide" id="slide14">
+            <p>Di tunggu ya jawabannya!</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 15 -->
+        <div class="slide" id="slide15">
+            <p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">iya/tidak</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 16 -->
+        <div class="slide" id="slide16">
+            <p>Kalian mungkin belum suka sama aku, tapi gapapa 😁😅😆😉</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Selanjutnya</button>
+                <button class="tombol" onclick="prevSlide()">Kembali</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 17 -->
+        <div class="slide" id="slide17">
+            <p>Aku bakal tetap ada dan merawat rasa ini! hehehe</p>
+            <div class="tombol-container">
+                <button class="tombol" onclick="nextSlide()">Pencet dong terakhir!</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 18 -->
+        <div class="slide-akhir" id="slide18">
+            <p>Sekarang Selamat Hari Valentine ya Cantik! ✨🌟<br>
+            <span class="emoji-akhir">🎉🔥💝💘🤍❤️‍🔥💕💌🫶🫰😆</span></p>
+        </div>
+    </div>
+
+    <script>
+        // NAVIGASI SLIDE
+        let slideSekarang = 1;
+        const totalSlide = 18;
+
+        // OTOMATIS KE SLIDE 2 SETELAH 5 DETIK
+        window.onload = function() {
+            // BUAT ORNAMEN LATAR
+            const latar = document.getElementById('ornamenLatar');
+            const ornamen = ['✨', '🌟', '💙'];
+            for (let i = 0; i < 50; i++) {
+                const item = document.createElement('div');
+                item.className = 'ornamen-item';
+                item.textContent = ornamen[Math.floor(Math.random() * ornamen.length)];
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDelay = `${Math.random() * 15}s`;
+                latar.appendChild(item);
+            }
+
+            // OTOMATIS KE SLIDE 2
+            setTimeout(() => {
+                showSlide(2);
+            }, 5000);
+        };
+
+        function showSlide(n) {
+            // SEMBUNYIKAN SEMUA SLIDE
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelector('.slide-akhir').classList.remove('active');
+
+            // TAMPILKAN SLIDE YANG DIPILIH
+            if (n < 18) {
+                document.getElementById(`slide${n}`).classList.add('active');
+  
