@@ -27,7 +27,17 @@
             background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #2196f3 100%);
             z-index: 999;
             display: flex; align-items: center; justify-content: center;
-            animation: intro-hilang 1s ease 5s forwards;
+            /* JEDA KURANGI & EFEK LEBIH CEPAT */
+            animation: intro-muncul 0.5s ease forwards, intro-hilang 0.8s ease 2s forwards;
+        }
+
+        @keyframes intro-muncul {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes intro-hilang {
+            to { opacity: 0; visibility: hidden; }
         }
 
         .intro-judul {
@@ -35,22 +45,25 @@
             color: #fff;
             text-align: center;
             text-shadow: 0 0 20px #bbdefb, 0 0 40px #2196f3;
+            /* EFEK TEKS BERGETAR LENTIK */
+            animation: judul-getar 1s ease-in-out infinite;
+        }
+
+        @keyframes judul-getar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .intro-ornamen {
             position: absolute;
             font-size: 70px;
             color: #fff;
-            animation: float-intro 4s ease-in-out infinite;
+            animation: float-intro 1.5s ease-in-out infinite;
         }
 
         @keyframes float-intro {
             0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-30px) rotate(15deg); }
-        }
-
-        @keyframes intro-hilang {
-            to { opacity: 0; visibility: hidden; }
+            50% { transform: translateY(-15px) rotate(10deg); }
         }
 
         .slide-container {
@@ -345,32 +358,12 @@
         let slideSekarang = 1;
         const totalSlide = 18;
 
-        // OTOMATIS KE SLIDE 2 SETELAH 5 DETIK
+        // OTOMATIS KE SLIDE 2 SETELAH 2 DETIK SAJA!
         window.onload = function() {
             // BUAT ORNAMEN LATAR
             const latar = document.getElementById('ornamenLatar');
             const ornamen = ['✨', '🌟', '💙'];
             for (let i = 0; i < 50; i++) {
                 const item = document.createElement('div');
-                item.className = 'ornamen-item';
-                item.textContent = ornamen[Math.floor(Math.random() * ornamen.length)];
-                item.style.left = `${Math.random() * 100}%`;
-                item.style.animationDelay = `${Math.random() * 15}s`;
-                latar.appendChild(item);
-            }
-
-            // OTOMATIS KE SLIDE 2
-            setTimeout(() => {
-                showSlide(2);
-            }, 5000);
-        };
-
-        function showSlide(n) {
-            // SEMBUNYIKAN SEMUA SLIDE
-            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-            document.querySelector('.slide-akhir').classList.remove('active');
-
-            // TAMPILKAN SLIDE YANG DIPILIH
-            if (n < 18) {
-                document.getElementById(`slide${n}`).classList.add('active');
-  
+                item.className = 'ornamen-item
+                    
