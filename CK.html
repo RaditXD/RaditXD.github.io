@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Bintang ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & BASIC STYLE --- */
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #4c669f, #3b5998); /* Biru Facebook */
+            color: #fff; height: 100vh; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; text-align: center;
+        }
+
+        /* --- UI ELEMENTS --- */
+        #app {
+            position: relative; z-index: 10; width: 85%; max-width: 450px; padding: 30px;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px);
+            border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 0.3s ease;
+        }
+        h1, h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; }
+        .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        button {
+            background: #54a3ff; /* Biru Muda */
+            color: #fff; border: none; padding: 14px 24px;
+            border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 110, 255, 0.5);
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 110, 255, 0.6); }
+        button:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(0, 110, 255, 0.5); }
+        button.secondary { background: rgba(255, 255, 255, 0.2); color: #ddd; }
+
+        /* --- ANIMATIONS --- */
+        .emoji-bg {
+            position: absolute; top: -60px; font-size: 2.2rem;
+            pointer-events: none; z-index: 1; animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        @keyframes waterfall { from { top: -10%; } to { top: 110%; } }
+        @keyframes explode { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(10); opacity: 0; } }
+
+        /* --- OVERLAYS --- */
+        #overlay-cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(66, 103, 178, 0.9); z-index: 100; display: none; /* Biru Transparan */
+            justify-content: center; align-items: center; font-size: 3.5rem;
+        }
+
+        /* --- BACKGROUNDS --- */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://i.imgur.com/9Q6QVYN.png'); /* Gambar Bintang Alternatif */
+            opacity: 0.4; z-index: 0; animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.2; } to { opacity: 0.4; } }
+
+        /* --- TYPING EFFECT --- */
+        .typing::after { content: '|'; animation: blink 0.9s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="star-bg" class="stars" style="display:none;"></div>
+    <div id="overlay-cover"></div>
+
+    <div id="app">
+        <h1>Halo Bintang! ✨</h1>
+        <p>Ada sesuatu buat kamu...</p>
+        <button onclick="startApp()">Buka Surat 💌</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let rainInterval;
+        const app = document.getElementById('app');
+        const overlay = document.getElementById('overlay-cover');
+        const starBg = document.getElementById('star-bg');
+
+        function startEmojiRain(emojis, mode = 'fall') {
+            clearInterval(rainInterval);
+            if (!emojis.length) return;
+            rainInterval = setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'emoji-bg';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animation = `${mode} ${Math.random() * 2 + 3}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 5000);
+            }, 250);
+        }
+
+        function typeWriter(text, el, speed, callback) {
+            let i = 0;
+            el.innerHTML = "";
+            el.classList.add("typing");
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    el.classList.remove("typing");
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        function startApp() {
+            renderSlide(1);
+        }
+
+        function renderSlide(n) {
+            currentSlide = n;
+            app.innerHTML = "";
+            starBg.style.display = "none";
+            clearInterval(rainInterval);
+            document.querySelectorAll('.emoji-bg').forEach(e => e.remove());
+            app.style.transform = "scale(0.95)";
+            setTimeout(() => app.style.transform = "scale(1)"; , 200);
+
+            switch(n) {
+                case 1:
+                    app.innerHTML = "<h1>Halo Bintang! ✨</h1><p>Ada sesuatu buat kamu...</p><button onclick='renderSlide(2)'>Buka Surat 💌</button>";
+                    startEmojiRain(["✨", "🌟", "💙"]);
+                    break;
+                case 2:
+                    app.innerHTML = "<p>Udah buka belum? 🤷‍♂️🙎‍♂️❓❓⁉️</p><button onclick='renderSlide(3)'>Sudah</button>";
+                    startEmojiRain(["🤷‍♂️", "🙎‍♂️", "❓", "❓", "⁉️"]);
+                    break;
+                case 3:
+                    app.innerHTML = "<p>kalau udah buka berarti hadiahnya udah sampek ya?!</p><div class='btn-group'><button onclick='renderSlide(4)'>Iyaa</button><button class='secondary' onclick='alert(\"kok mau balik ???\")'>Kembali</button></div>";
+                    break;
+                case 4:
+                    app.innerHTML = "<h2>Selamat Hari Valentine!</h2><p>Maaf ya gak nepati janji – padahal udah janji gak kasih apa-apa.</p><div class='btn-group'><button onclick='renderSlide(5)'>Selanjutnya</button><button class='secondary' onclick='alert(\"masa balik lagi ??\")'>Kembali</button></div>";
+                    startEmojiRain(["🎉", "🔥", "💝", "💕"]);
+                    break;
+                case 5:
+                    app.innerHTML = "<p>Semoga kamu seneng sama hadiah aku ya!</p><div class='btn-group'><button onclick='renderSlide(6)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(3)'>Kembali</button></div>";
+                    startEmojiRain(["😁", "😆", "😝", "😜", "😅", "🤪"]);
+                    break;
+                case 6:
+                    app.innerHTML = "<p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p><div class='btn-group'><button onclick='renderSlide(7)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(5)'>Kembali</button></div>";
+                    break;
+                case 7:
+                    app.innerHTML = "<h2 style='font-size: 2rem;'>Kalian kan kembar, cuma beda Bintang dan Bulan aja. Tapi jelas aku suka kalian berdua!</h2><div class='btn-group'><button onclick='renderSlide(8)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(6)'>Kembali</button></div>";
+                    break;
+                case 8:
+                    app.innerHTML = "<p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu. Kalau risih, aku minta maaf ya!</p><div class='btn-group'><button onclick='renderSlide(9)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(7)'>Kembali</button></div>";
+                    startEmojiRain(["😔", "🙏", "🥺"]);
+                    break;
+                case 9:
+                    app.innerHTML = "<p>Jangan kasih tau atau liatin ke siapapun ya. Aku malu banget!</p><div class='btn-group'><button onclick='renderSlide(10)'>Iya</button><button class='secondary' onclick='renderSlide(8)'>iya deh</button></div>";
+                    startEmojiRain(["🫣", "🤭"]);
+                    break;
+                case 10:
+                    app.innerHTML = "<p>Emmm...</p><div class='btn-group'><button onclick='renderSlide(11)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(9)'>Kembali</button></div>";
+                    startEmojiRain(["🥺", "🤔", "❓"]);
+                    break;
+                case 11:
+                    app.innerHTML = "<p>Bintang, kamu mau gak jadi pacarku?</p><div class='btn-group'><button onclick='renderSlide(12)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(10)'>Kembali</button></div>";
+                    startEmojiRain(["😖", "👉👈", "🫠", "💌", "💕", "🫶"], 'waterfall');
+                    break;
+                case 12:
+                    app.innerHTML = "<p>Maaf ya tiba-tiba nembak gitu... Aku sendiri juga bingung kenapa tiba-tiba berani bilang begini!</p><div class='btn-group'><button onclick='renderSlide(13)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(11)'>Kembali</button></div>";
+                    break;
+                case 13:
+                    app.innerHTML = "<p>Kalau mau jawab atau cuma mau chat aja, nomor aku masih sama kok</p><div class='btn-group'><button onclick='renderSlide(14)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(12)'>Kembali</button></div>";
+                    break;
+                case 14:
+                    app.innerHTML = "<p>Di tunggu ya jawabannya!</p><div class='btn-group'><button onclick='renderSlide(15)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(13)'>Kembali</button></div>";
+                    startEmojiRain(["✨", "🔥", "😍"]);
+                    break;
+                case 15:
+                    app.innerHTML = "<p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p><div class='btn-group'><button onclick='renderSlide(16)'>iya/tidak</button><button class='secondary' onclick='renderSlide(14)'>Kembali</button></div>";
+                    break;
+                case 16:
+                    app.innerHTML = "<p>Kalian mungkin belum suka sama aku, tapi gapapa – aku bakal tetap ada dan merawat rasa ini! hehehe</p><div class='btn-group'><button onclick='renderSlide(17)'>Selanjutnya</button><button class='secondary' onclick='renderSlide(15)'>Kembali</button></div>";
+                    startEmojiRain(["😁", "😅", "😆", "😉"]);
+                    break;
+                case 17:
+                    app.innerHTML = "<p>Sekali lagi Selamat Hari Valentine ya Cantik! ✨🌟</p><button onclick='renderSlide(18)'>pencet dong slide terakhir</button>";
+                    break;
+                case 18:
+                    startEmojiRain(["🎉", "🔥", "💝", "💘", "🤍", "❤️‍🔥", "💕", "💌", "🫶", "🫰", "😆"], 'waterfall');
+                    app.innerHTML = "<h1>Selamat Hari Valentine! ✨🌟💖</h1>";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
+
