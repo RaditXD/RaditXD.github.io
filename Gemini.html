@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Special for Bintang ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;
+            background: #020617;
+            height: 100vh; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; text-align: center;
+            perspective: 1000px;
+        }
+
+        /* Aura Background Animasi */
+        .aura {
+            position: fixed; top: 50%; left: 50%; width: 150vw; height: 150vh;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(147, 51, 234, 0.1) 30%, transparent 70%);
+            transform: translate(-50%, -50%); z-index: -1;
+            animation: pulse Aura 8s ease-in-out infinite alternate;
+        }
+        @keyframes pulseAura { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; } }
+
+        /* Container Estetik */
+        #content-wrapper {
+            z-index: 10; width: 88%; max-width: 420px;
+            padding: 40px 25px; border-radius: 35px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        h1 { font-family: 'Pacifico', cursive; font-size: 2.2rem; color: #60a5fa; margin: 0; text-shadow: 0 0 20px rgba(96, 165, 250, 0.4); }
+        h2 { font-size: 1.4rem; font-weight: 700; color: white; line-height: 1.4; margin: 15px 0; }
+        p { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+
+        /* Tombol Modern */
+        .btn-group { display: flex; gap: 12px; justify-content: center; margin-top: 30px; }
+        button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white; border: none; padding: 14px 28px;
+            border-radius: 20px; cursor: pointer; font-weight: 700;
+            font-size: 0.9rem; transition: all 0.4s;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+        button:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5); }
+        button:active { transform: scale(0.95); }
+        button.back { background: rgba(255, 255, 255, 0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.1); }
+
+        /* Emoji System */
+        .emoji { position: absolute; pointer-events: none; z-index: 1; will-change: transform; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        
+        @keyframes floatSwing {
+            0% { transform: translateY(-15vh) rotate(0deg) translateX(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(var(--r)) translateX(var(--x)); opacity: 0; }
+        }
+
+        @keyframes waterfall {
+            0% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+            50% { opacity: 1; transform: translateY(40vh) scale(1.1); }
+            100% { transform: translateY(110vh) scale(1); opacity: 0; }
+        }
+
+        @keyframes explodeFirework {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5); opacity: 0; }
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000; display: none; background: #020617;
+            justify-content: center; align-items: center; font-size: 5rem;
+        }
+
+        .typing::after { content: '|'; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .siluet { filter: blur(10px); opacity: 0; transition: 3s; }
+        .reveal { filter: blur(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="aura"></div>
+    <div id="overlay"></div>
+
+    <div id="content-wrapper">
+        <h1 id="title">Halo Bintang! ✨</h1>
+        <div id="main-content">
+            <p>Klik tombol di bawah untuk melihat pesan tulus dariku...</p>
+            <button onclick="move(1)">Buka Dong 💌</button>
+        </div>
+    </div>
+
+    <script>
+        let rain;
+        const wrapper = document.getElementById('content-wrapper');
+        const main = document.getElementById('main-content');
+        const title = document.getElementById('title');
+        const ov = document.getElementById('overlay');
+
+        function createEmoji(list, mode = 'float') {
+            const el = document.createElement('div');
+            el.className = 'emoji';
+            el.innerText = list[Math.floor(Math.random() * list.length)];
+            
+            const duration = Math.random() * 2 + 3;
+            el.style.left = Math.random() * 95 + 'vw';
+            el.style.fontSize = (Math.random() * 15 + 20) + 'px';
+
+            if (mode === 'waterfall') {
+                el.style.animation = `waterfall ${Math.random() * 0.5 + 0.7}s ease-in forwards`;
+            } else if (mode === 'firework') {
+                el.style.left = '50%'; el.style.top = '50%';
+                el.style.setProperty('--tx', (Math.random() - 0.5) * 600 + 'px');
+                el.style.setProperty('--ty', (Math.random() - 0.5) * 600 + 'px');
+                el.style.animation = `explodeFirework 1.5s cubic-bezier(0, 0.5, 0.2, 1) forwards`;
+            } else {
+                el.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+                el.style.setProperty('--x', (Math.random() - 0.5) * 150 + 'px');
+                el.style.animation = `floatSwing ${duration}s linear forwards`;
+            }
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), mode === 'float' ? 5000 : 2000);
+        }
+
+        function setRain(emojis, mode = 'float', speed = 300) {
+            clearInterval(rain);
+            if (!emojis.length) return;
+            rain = setInterval(() => createEmoji(emojis, mode), speed);
+        }
+
+        function type(text, el, speed = 50, cb) {
+            let i = 0; el.innerHTML = ""; el.classList.add("typing");
+            function t() {
+                if(i < text.length) { el.innerHTML += text.charAt(i); i++; setTimeout(t, speed); }
+                else { el.classList.remove("typing"); if(cb) cb(); }
+            }
+            t();
+        }
+
+        function move(n) {
+            wrapper.style.opacity = '0';
+            wrapper.style.transform = 'translateZ(-100px) rotateX(10deg)';
+            
+            setTimeout(() => {
+                wrapper.style.opacity = '1';
+                wrapper.style.transform = 'translateZ(0) rotateX(0)';
+                title.style.display = "none";
+
+                if(n==1){
+                    title.style.display = "block"; title.innerText = "HAI BINTANG!";
+                    main.innerHTML = "<h2>INI BUAT KAMU! ✨🌟</h2>";
+                    setRain(["✨", "🌟", "💙"], 'float', 400);
+                    setTimeout(() => move(2), 3500);
+                }
+                else if(n==2){
+                    main.innerHTML = "<h2>Udah buka belum?</h2><div class='btn-group'><button onclick='move(3)'>Sudah</button></div>";
+                    setRain(["🤷‍♂️","🤔","😁","🤭","❓","⁉️"], 'waterfall', 150);
+                }
+                else if(n==3){
+                    main.innerHTML = "<h2>Kalau udah buka berarti hadiahnya udah sampek ya?!</h2><div class='btn-group'><button onclick='move(4)'>Iyaa</button><button class='back' onclick='alert(\"kok mau balik ???\")'>Kembali</button></div>";
+                    setRain(["✨","🌟"], 'float', 600);
+                }
+                else if(n==4){
+                    ov.style.display = "flex"; ov.innerHTML = "🎉🔥💝💘❤️‍🔥💕";
+                    setTimeout(() => {
+                        ov.style.animation = "explodeFirework 1s forwards";
+                        setTimeout(() => {
+                            ov.style.display = "none";
+                            main.innerHTML = "<h2>Selamat Valentine!</h2><p id='s4-sub'></p>";
+                            setRain(["🎉","🔥","💝","💘","❤️‍🔥","💕"], 'float', 300);
+                            setTimeout(() => {
+                                document.getElementById('s4-sub').innerText = "Maaf ya gak nepati janji - padahal udah janji gak ngasi apa-apa.";
+                                setRain(["😭","😔","🙏","😫","😅"], 'float', 300);
+                                setTimeout(() => {
+                                    setRain(["🎉","🔥","💝","😭","😔"], 'float', 200);
+                                    main.innerHTML += "<button onclick='move(5)'>Lanjut</button>";
+                                }, 3000);
+                            }, 1500);
+                        }, 800);
+                    }, 1200);
+                }
+                else if(n==5){
+                    main.innerHTML = "<h2>Semoga kamu seneng sama hadiah aku ya!</h2><div class='btn-group'><button onclick='move(6)'>Lanjut</button><button class='back' onclick='move(3)'>Kembali</button></div>";
+                    setRain(["😁","😆","😝","😜","😅","🤪"], 'float', 300);
+                }
+                else if(n==6){
+                    main.innerHTML = "<h2>Jujur, aku masih belum tahu kenapa suka sama kamu.</h2><div class='btn-group'><button onclick='move(7)'>Lanjut</button></div>";
+                    setRain([]);
+                }
+                else if(n==7){
+                    main.innerHTML = "<h2>Kalian kan kembar, cuma beda Bintang dan Bulan aja. Tapi jelas aku suka kalian berdua!</h2><div class='btn-group'><button onclick='move(8)'>Lanjut</button></div>";
+                    setRain(["🤭","😹","🫰","🫶","😜","🤪"], 'float', 300);
+                }
+                else if(n==8){
+                    main.innerHTML = "<h2>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu.</h2><div class='btn-group'><button onclick='move(9)'>Lanjut</button></div>";
+                    setRain(["😭","🙏","😔","🥺","🙃"], 'float', 400);
+                }
+                else if(n==9){
+                    main.innerHTML = "<h2>Jangan kasih tau ke siapapun ya. Aku malu banget!</h2><div class='btn-group'><button onclick='move(10)'>Iya</button></div>";
+                    setRain(["❓","❔","💬","🫣"], 'float', 400);
+                }
+                else if(n==10){
+                    main.innerHTML = "<h2>Emmm...</h2><button onclick='move(11)'>Lanjut</button>";
+                    setRain(["🥺","❓","🤔"], 'float', 500);
+                }
+                else if(n==11){
+                    main.innerHTML = ""; setRain(["😣","🫣","🫠","💌","💕","🫶"], 'waterfall', 100);
+                    setTimeout(() => {
+                        clearInterval(rain);
+                        setTimeout(() => {
+                            main.innerHTML = "<h2>Bintang, kamu mau gak jadi pacarku? 😖👉👈</h2>";
+                            setTimeout(() => {
+                                setRain(["😣","🫣","🫠","💌","💕","🫶"], 'float', 300);
+                                main.innerHTML += "<button onclick='move(12)'>Lanjut</button>";
+                            }, 1500);
+                        }, 1000);
+                    }, 2500);
+                }
+                else if(n==12){
+                    main.innerHTML = "<h2>Maaf ya tiba-tiba nembak gitu...</h2><p id='t12'></p>";
+                    setTimeout(() => {
+                        type("Aku sendiri juga bingung kenapa tiba-tiba berani bilang begini 😅🙏", document.getElementById('t12'), 50, () => {
+                            main.innerHTML += "<button onclick='move(13)'>Lanjut</button>";
+                        });
+                    }, 800);
+                }
+                else if(n==13){
+                    main.innerHTML = "<p id='t13-1'></p><p id='t13-2' class='siluet'></p>";
+                    type("Kalau mau jawab atau cuma chat aja,", document.getElementById('t13-1'), 40, () => {
+                        const s = document.getElementById('t13-2'); s.innerText = "nomor aku masih sama kok 😆";
+                        setTimeout(() => { s.className = 'reveal'; main.innerHTML += "<button onclick='move(14)'>Lanjut</button>"; }, 1000);
+                    });
+                }
+                else if(n==14){
+                    main.innerHTML = "<h2>Di tunggu ya jawabannya!</h2><button onclick='move(15)'>Lanjut</button>";
+                    setRain(["🍭","🍫","🧁"], 'float', 400);
+                }
+                else if(n==15){
+                    main.innerHTML = "<h2>Harus berani kan buat bilang ini?</h2><div class='btn-group'><button onclick='move(16)'>iya/tidak</button></div>";
+                }
+                else if(n==16){
+                    main.innerHTML = "<h2>Mungkin belum suka, tapi gapapa 😁</h2><button onclick='move(17)'>Lanjut</button>";
+                    setTimeout(() => {
+                        const w = document.createElement('div');
+                        w.style = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center;font-size:10rem;z-index:9999;";
+                        w.innerText = "😉"; document.body.appendChild(w);
+                        setTimeout(() => w.remove(), 1000);
+                    }, 2500);
+                }
+                else if(n==17){
+                    main.innerHTML = "<h2>Aku bakal tetap ada di sini</h2><button onclick='move(18)'>Terakhir!</button>";
+                }
+                else if(n==18){
+                    main.innerHTML = "<h1>Selamat Valentine Bintang Cantik! ✨🌟</h1>";
+                    setRain([]); setInterval(() => createEmoji(["🎉","🔥","💝","💘","❤️‍🔥","💕","🫶","🫰"], 'firework'), 500);
+                }
+            }, 600);
+        }
+    </script>
+</body>
+  </html>
