@@ -1,172 +1,74 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Bintang ✨</title>
+    <title>Untuk Bintang</title>
     <style>
-        body {
-            margin: 0; padding: 0; font-family: sans-serif;
-            background: linear-gradient(135deg, #021B79, #0575E6);
-            color: white; height: 100vh; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; text-align: center;
-        }
-        #card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 30px; border-radius: 20px;
-            width: 80%; max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            z-index: 10;
-        }
-        h1 { font-size: 1.5rem; }
-        p { font-size: 1.1rem; line-height: 1.4; }
-        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
-        button {
-            padding: 10px 20px; border-radius: 20px; border: none;
-            background: #00d2ff; color: #021B79; font-weight: bold; cursor: pointer;
-        }
-        .btn-back { background: rgba(255,255,255,0.3); color: white; }
-        .emoji {
-            position: fixed; top: -50px; font-size: 24px;
-            animation: fall linear forwards; pointer-events: none;
-        }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #021B79; display: none; justify-content: center;
-            align-items: center; font-size: 3rem; z-index: 100;
-        }
+        body { background: #0575E6; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
+        .box { margin: 50px auto; padding: 20px; width: 85%; border: 2px solid white; border-radius: 15px; background: #021B79; }
+        button { padding: 10px 20px; margin: 10px; border-radius: 20px; border: none; background: #00d2ff; font-weight: bold; }
+        .falling { position: fixed; top: -20px; animation: fall 4s linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh); } }
     </style>
 </head>
 <body>
-
-    <div id="overlay"></div>
-
-    <div id="card">
-        <div id="content">
-            <h1>KLIK UNTUK MEMULAI ✨</h1>
-            <button onclick="next(1)">Buka Surat 💌</button>
+    <div class="box" id="main">
+        <h1 id="judul">HAI BINTANG! ✨</h1>
+        <p id="teks">Ada sesuatu buat kamu...</p>
+        <div id="btn-place">
+            <button onclick="pindah(1)">Buka Surat 💌</button>
         </div>
     </div>
 
     <script>
-        let step = 0;
-        let rainInterval;
-
-        function startRain(emojis) {
-            clearInterval(rainInterval);
-            if (!emojis.length) return;
-            rainInterval = setInterval(() => {
-                const e = document.createElement('div');
-                e.className = 'emoji';
-                e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                e.style.left = Math.random() * 100 + 'vw';
-                e.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        let s = 1;
+        function hujan(em) {
+            setInterval(() => {
+                let e = document.createElement('div');
+                e.className = 'falling';
+                e.innerText = em[Math.floor(Math.random()*em.length)];
+                e.style.left = Math.random()*100+'vw';
                 document.body.appendChild(e);
-                setTimeout(() => e.remove(), 5000);
+                setTimeout(() => e.remove(), 4000);
             }, 300);
         }
 
-        function next(s) {
-            step = s;
-            const content = document.getElementById('content');
-            const ov = document.getElementById('overlay');
-            
-            // Logika Tiap Slide
-            if (step == 1) {
-                content.innerHTML = "<h1>HAI BINTANG <br> INI BUAT KAMU! ✨🌟</h1>";
-                startRain(['✨', '🌟', '💙']);
-                setTimeout(() => next(2), 3500);
-            } 
-            else if (step == 2) {
-                content.innerHTML = "<p>Udah buka belum?</p><button onclick='next(3)'>Sudah</button>";
-                startRain(['🤷‍♂️','🤔','😁','🤭','❓']);
+        function pindah(n) {
+            s = n;
+            let j = document.getElementById('judul');
+            let t = document.getElementById('teks');
+            let b = document.getElementById('btn-place');
+
+            if(s==1) {
+                j.innerHTML = "HAI BINTANG<br>INI BUAT KAMU! ✨";
+                t.innerText = ""; b.innerHTML = "";
+                hujan(['✨','🌟','💙']);
+                setTimeout(() => pindah(2), 3000);
             }
-            else if (step == 3) {
-                content.innerHTML = "<p>Kalau udah buka berarti hadiahnya udah sampek ya?!</p><div class='btn-group'><button onclick='next(4)'>Iyaa</button><button class='btn-back' onclick='alert(\"kok mau balik ???\")'>Kembali</button></div>";
-                startRain(['✨']);
+            else if(s==2) {
+                j.innerText = "Udah buka belum?";
+                b.innerHTML = "<button onclick='pindah(3)'>Sudah</button>";
+                hujan(['🤔','🤭','❓']);
             }
-            else if (step == 4) {
-                ov.style.display = 'flex'; ov.innerHTML = "🎉🔥💝💘❤️‍🔥💕";
-                setTimeout(() => {
-                    ov.style.display = 'none';
-                    content.innerHTML = "<h1>Selamat Hari Valentine!</h1><p>Maaf ya gak nepati janji...</p>";
-                    startRain(['😭','😔','🙏','😫','😅','🎉','🔥','💝']);
-                    setTimeout(() => {
-                        content.innerHTML += "<button onclick='next(5)'>Lanjut</button>";
-                    }, 2000);
-                }, 1500);
+            else if(s==3) {
+                j.innerText = "Hadiahnya udah sampai kan?";
+                b.innerHTML = "<button onclick='pindah(4)'>Iya</button>";
             }
-            else if (step == 5) {
-                content.innerHTML = "<p>Semoga kamu seneng sama hadiah aku ya!</p><div class='btn-group'><button onclick='next(6)'>Selanjutnya</button><button class='btn-back' onclick='next(3)'>Kembali</button></div>";
-                startRain(['😁','😆','😝','😜','😅','🤪']);
+            else if(s==4) {
+                j.innerText = "Selamat Valentine!";
+                t.innerText = "Maaf ya gak nepati janji...";
+                b.innerHTML = "<button onclick='pindah(5)'>Lanjut</button>";
+                hujan(['😭','🙏','🎉']);
             }
-            else if (step == 6) {
-                content.innerHTML = "<p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p><div class='btn-group'><button onclick='next(7)'>Selanjutnya</button><button class='btn-back' onclick='next(5)'>Kembali</button></div>";
-                startRain(['💙','🤔']);
+            // Tambahkan slide selanjutnya sesuai pola di atas jika ini berhasil
+            else if(s==5) {
+                j.innerText = "Semoga kamu suka!";
+                b.innerHTML = "<button onclick='pindah(6)'>Lanjut</button>";
             }
-            else if (step == 7) {
-                content.innerHTML = "<p>Kalian kan kembar, cuma beda Bintang dan Bulan aja. Tapi jelas aku suka kalian berdua!</p><div class='btn-group'><button onclick='next(8)'>Selanjutnya</button><button class='btn-back' onclick='next(6)'>Kembali</button></div>";
-                startRain(['🤭','😹','🫰','🫶','😜']);
-            }
-            else if (step == 8) {
-                content.innerHTML = "<p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu. Kalau risih, aku minta maaf ya!</p><div class='btn-group'><button onclick='next(9)'>Selanjutnya</button><button class='btn-back' onclick='next(7)'>Kembali</button></div>";
-                startRain(['😭','🙏','😔','🥺']);
-            }
-            else if (step == 9) {
-                content.innerHTML = "<p>Jangan kasih tau atau liatin ke siapapun ya. Aku malu banget!</p><div class='btn-group'><button onclick='next(10)'>Iya</button><button class='btn-back' onclick='next(8)'>iya deh</button></div>";
-                startRain(['❓','🤭','🫣']);
-            }
-            else if (step == 10) {
-                content.innerHTML = "<p>Emmm...</p><div class='btn-group'><button onclick='next(11)'>Selanjutnya</button><button class='btn-back' onclick='next(9)'>Kembali</button></div>";
-                startRain(['🥺','❓','🤔']);
-            }
-            else if (step == 11) {
-                content.innerHTML = "<h1>...</h1>";
-                startRain(['😣','🫣','🫠','💌','💕','🫶']);
-                setTimeout(() => {
-                    content.innerHTML = "<h1>Bintang, kamu mau gak jadi pacarku? 😖👉👈</h1><div class='btn-group'><button onclick='next(12)'>Selanjutnya</button><button class='btn-back' onclick='next(10)'>Kembali</button></div>";
-                }, 2500);
-            }
-            else if (step == 12) {
-                content.innerHTML = "<p>Maaf ya tiba-tiba nembak gitu... <br> Aku sendiri juga bingung kenapa tiba-tiba berani bilang begini 😅🙏</p><button onclick='next(13)'>Selanjutnya</button>";
-                startRain(['🎉','🔥','💝','😫','🙏']);
-            }
-            else if (step == 13) {
-                content.innerHTML = "<p>Kalau mau jawab atau cuma chat aja, <br> nomor aku masih sama kok 😆</p><button onclick='next(14)'>Selanjutnya</button>";
-                startRain(['🎉','🔥','💝','🥰','🫰']);
-            }
-            else if (step == 14) {
-                content.innerHTML = "<p>Di tunggu ya jawabannya!</p><button onclick='next(15)'>Selanjutnya</button>";
-                startRain(['🍭','🍬','🍫','🧁','🍩']);
-            }
-            else if (step == 15) {
-                content.innerHTML = "<p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p><div class='btn-group'><button onclick='next(16)'>iya/tidak</button><button class='btn-back' onclick='next(14)'>Kembali</button></div>";
-                startRain(['🍭','🍬','🍫']);
-            }
-            else if (step == 16) {
-                content.innerHTML = "<p>Kalian mungkin belum suka sama aku, tapi gapapa 😁</p><button onclick='next(17)'>Selanjutnya</button>";
-                startRain(['💙','💖','💘','💝']);
-                setTimeout(() => {
-                    ov.style.display = 'flex'; ov.innerHTML = "😉"; ov.style.background = "rgba(0,0,0,0.7)";
-                    setTimeout(() => { ov.style.display = 'none'; ov.style.background = "#021B79"; }, 1000);
-                }, 2000);
-            }
-            else if (step == 17) {
-                content.innerHTML = "<p>Aku bakal tetap ada di sini tetep biasa aja</p><button onclick='next(18)'>Pencet dong terakhir!</button>";
-                startRain(['🥰','😆','🫰','💝','🫶']);
-            }
-            else if (step == 18) {
-                content.innerHTML = "<h1>Sekali lagi Selamat Hari Valentine ya Bintang Cantik! ✨🌟</h1>";
-                setInterval(() => {
-                    const e = document.createElement('div');
-                    e.className = 'emoji'; e.innerText = '🎉';
-                    e.style.left = Math.random() * 100 + 'vw';
-                    e.style.animationDuration = '1s';
-                    document.body.appendChild(e);
-                }, 100);
+            else {
+                j.innerText = "Lanjut ke slide berikutnya?";
+                b.innerHTML = "<button onclick='pindah("+(s+1)+")'>Lanjut</button>";
             }
         }
     </script>
