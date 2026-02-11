@@ -2,303 +2,500 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💘 SURPRISE UNTUK BINTANG 💘</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Bintang ✨</title>
     <style>
-        /* SAMA DENGAN VERSI SEBELUMNYA, HANYA ADA TAMBAHAN EMOJI */
-        * {
+        /* --- RESET & BASIC STYLE --- */
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Comic Sans MS', cursive;
-        }
-
-        html, body {
-            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #021B79, #0575E6); /* Tema Biru */
+            color: white;
+            height: 100vh;
             overflow: hidden;
-            background: linear-gradient(120deg, #0A2463, #1E88E5, #3949AB);
-            background-size: 200% 200%;
-            animation: bg-gerak 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
         }
 
-        @keyframes bg-gerak {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* --- CONTAINER --- */
+        #app {
+            z-index: 10;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.5s ease;
+            min-height: 300px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.8s ease;
-            z-index: 1;
+            align-items: center;
         }
 
-        .slide.active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 5;
+        h1, h2 { margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px; }
+
+        /* --- TOMBOL --- */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        h1 {
-            font-size: 4rem;
-            text-shadow: 0 0 20px #FFD700, 0 0 40px #FFFFFF, 0 0 60px #FF69B4;
-            margin-bottom: 30px;
-        }
-
-        p {
-            font-size: 2rem;
-            text-shadow: 0 0 15px #FFFFFF;
-            margin-bottom: 50px;
-            line-height: 1.8;
-        }
-
-        .tombol {
-            background: linear-gradient(45deg, #FF69B4, #FFD700);
-            color: #0A2463;
+        button {
+            background: #00d2ff; /* Biru cerah */
+            color: #021B79;
             border: none;
-            padding: 20px 45px;
-            margin: 10px;
+            padding: 12px 25px;
+            font-size: 1rem;
             border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
         }
 
-        .tombol:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 1);
-        }
+        button:hover { transform: scale(1.05); background: #fff; }
+        button.secondary { background: rgba(255, 255, 255, 0.2); color: white; }
 
-        /* EMOJI TERBANG KHUSUS SLIDE */
-        .emoji-terbang {
+        /* --- ANIMASI EMOJI LATAR --- */
+        .emoji-bg {
             position: absolute;
-            font-size: 2.5rem;
-            opacity: 0;
-            animation: emoji-terbang 8s linear infinite;
-            z-index: 2;
+            top: -10vh;
+            font-size: 2rem;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
         }
 
-        @keyframes emoji-terbang {
-            0% {
-                opacity: 0;
-                transform: translateY(100vh) rotate(0deg);
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% {
-                opacity: 0;
-                transform: translateY(-10vh) rotate(360deg);
-            }
+        @keyframes floatUp { to { transform: translateY(-120vh) rotate(360deg); } }
+        @keyframes floatDown { to { transform: translateY(120vh) rotate(360deg); } }
+        @keyframes waterfall { 
+            0% { top: -10%; opacity: 1; } 
+            100% { top: 110%; opacity: 1; } 
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(10); opacity: 0; }
         }
 
-        /* SPARKLE KECIL-KECIL */
-        .sparkle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px white;
-            animation: sparkle 3s linear infinite;
+        /* --- KHUSUS SLIDE 4 (Overlay) --- */
+        #overlay-cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #021B79; z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 3rem; flex-wrap: wrap;
+            transition: opacity 1s;
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+        /* --- KHUSUS SLIDE 16 (Kedipan) --- */
+        #wink-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 99;
+            display: none; justify-content: center; align-items: center;
+            font-size: 10rem;
         }
+
+        /* --- KHUSUS SLIDE 3 (Bintang) --- */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            pointer-events: none; opacity: 0.5; z-index: 0;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.8; } }
+
+        /* --- TYPING CURSOR --- */
+        .typing::after { content: '|'; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
     </style>
 </head>
 <body>
-    <!-- ================== SLIDE 1 ================== -->
-    <div class="slide active" id="slide1">
-        <h1>✨ HAI BINTANG ✨</h1>
-        <p>INI BUAT KAMU! 💘🌟🎉</p>
-    </div>
 
-    <!-- ================== SLIDE 2 ================== -->
-    <div class="slide" id="slide2">
-        <p>Udah buka belum? 🤷‍♂️🙎‍♂️❓❓⁉️</p>
-        <button class="tombol" onclick="gantiSlide(3)">Sudah</button>
-    </div>
+    <div id="star-bg" style="display:none;" class="stars"></div>
+    
+    <div id="overlay-cover" style="display:none;">🎉🔥💝💘❤️‍🔥💕</div>
+    
+    <div id="wink-overlay">😉</div>
 
-    <!-- ================== SLIDE 3 ================== -->
-    <div class="slide" id="slide3">
-        <p>Kalau udah buka berarti hadiahnya udah sampe ya?!</p>
-        <button class="tombol" onclick="gantiSlide(4)">Iyaa</button>
-        <button class="tombol" onclick="gantiSlide(2)">kok mau balik ???</button>
-    </div>
-
-    <!-- ================== SLIDE 4 ================== -->
-    <div class="slide" id="slide4">
-        <p>Selamat Hari Valentine!<br>Maaf ya gak nepati janji – padahal udah janji gak kasih apa-apa.</p>
-        <button class="tombol" onclick="gantiSlide(5)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(3)">masa balik lagi ??</button>
-    </div>
-
-    <!-- ================== SLIDE 5 ================== -->
-    <div class="slide" id="slide5">
-        <p>Semoga kamu seneng sama hadiah aku ya!</p>
-        <button class="tombol" onclick="gantiSlide(6)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(4)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 6 ================== -->
-    <div class="slide" id="slide6">
-        <p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p>
-        <button class="tombol" onclick="gantiSlide(7)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(5)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 7 ================== -->
-    <div class="slide" id="slide7">
-        <p>Kalian kan kembar, cuma beda Bintang dan Bulan aja.<br>Tapi jelas aku suka kalian berdua!</p>
-        <button class="tombol" onclick="gantiSlide(8)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(6)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 8 ================== -->
-    <div class="slide" id="slide8">
-        <p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu.<br>Kalau risih, aku minta maaf ya!</p>
-        <button class="tombol" onclick="gantiSlide(9)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(7)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 9 ================== -->
-    <div class="slide" id="slide9">
-        <p>Jangan kasih tau atau liatin ke siapapun ya<br>Aku malu banget!</p>
-        <button class="tombol" onclick="gantiSlide(10)">Iya</button>
-        <button class="tombol" onclick="gantiSlide(8)">iya deh</button>
-    </div>
-
-    <!-- ================== SLIDE 10 ================== -->
-    <div class="slide" id="slide10">
-        <p>Emmm...</p>
-        <button class="tombol" onclick="gantiSlide(11)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(9)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 11 ================== -->
-    <div class="slide" id="slide11">
-        <p>Bintang, kamu mau gak jadi pacarku?</p>
-        <button class="tombol" onclick="gantiSlide(12)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(10)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 12 ================== -->
-    <div class="slide" id="slide12">
-        <p>Maaf ya tiba-tiba nembak gitu...<br>Aku sendiri juga bingung kenapa berani bilang begini!</p>
-        <button class="tombol" onclick="gantiSlide(13)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(11)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 13 ================== -->
-    <div class="slide" id="slide13">
-        <p>Kalau mau jawab atau cuma mau chat aja,<br>nomor aku masih sama kok</p>
-        <button class="tombol" onclick="gantiSlide(14)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(12)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 14 ================== -->
-    <div class="slide" id="slide14">
-        <p>Di tunggu ya jawabannya!</p>
-        <button class="tombol" onclick="gantiSlide(15)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(13)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 15 ================== -->
-    <div class="slide" id="slide15">
-        <p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p>
-        <button class="tombol" onclick="gantiSlide(16)">iya/tidak</button>
-        <button class="tombol" onclick="gantiSlide(14)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 16 ================== -->
-    <div class="slide" id="slide16">
-        <p>Kalian mungkin belum suka sama aku, tapi gapapa – aku bakal tetap ada dan merawat rasa ini! hehehe</p>
-        <button class="tombol" onclick="gantiSlide(17)">Selanjutnya</button>
-        <button class="tombol" onclick="gantiSlide(15)">Kembali</button>
-    </div>
-
-    <!-- ================== SLIDE 17 ================== -->
-    <div class="slide" id="slide17">
-        <p>Sekali lagi Selamat Hari Valentine ya Cantik! ✨🌟</p>
-    </div>
-
+    <div id="app">
+        </div>
 
     <script>
-        // DAFTAR EMOJI KHUSUS SLIDE INI
-        const emojiList = ['🥺','👉','👈','🫠','💌','💕','🫶','💖','💝'];
+        // --- KONFIGURASI DATA SLIDE ---
+        const slides = [
+            { // Slide 1
+                text: "<h1>HAI BINTANG <br> INI BUAT KAMU! ✨🌟</h1>",
+                type: "auto",
+                bgEmojis: ["✨", "🌟", "💙"],
+                timer: 4000
+            },
+            { // Slide 2
+                text: "<p>Udah buka belum?</p>",
+                buttons: [{txt: "Sudah", next: true}],
+                bgEmojis: ["🤷‍♂️", "🤔", "😁", "🤭", "❓", "⁉️"]
+            },
+            { // Slide 3
+                text: "<p>Kalau udah buka berarti hadiahnya udah sampek ya?!</p>",
+                buttons: [
+                    {txt: "Iyaa", next: true},
+                    {txt: "kok mau balik ???", next: false}
+                ],
+                special: "stars", // Efek Bintang
+                bgEmojis: []
+            },
+            { // Slide 4 (Kompleks)
+                text: "", // Diisi via JS khusus
+                type: "special-4",
+                buttons: [{txt: "Lanjut", next: true}], // Muncul nanti
+                bgEmojis: [] 
+            },
+            { // Slide 5
+                text: "<p>Semoga kamu seneng sama hadiah aku ya!</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😁", "😆", "😝", "😜", "😅", "🤪"]
+            },
+            { // Slide 6
+                text: "<p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["💙", "🤔", "💭"]
+            },
+            { // Slide 7
+                text: "<p>Kalian kan kembar, cuma beda Bintang dan Bulan aja. Tapi jelas aku suka kalian berdua!</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🤭", "😹", "🫰", "🫶", "😜", "🤪"]
+            },
+            { // Slide 8
+                text: "<p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu. Kalau risih, aku minta maaf ya!</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😭", "🙏", "😔", "🥺", "🙃"]
+            },
+            { // Slide 9
+                text: "<p>Jangan kasih tau atau liatin ke siapapun ya. Aku malu banget!</p>",
+                buttons: [{txt: "Iya", next: true}, {txt: "iya deh", next: false}],
+                bgEmojis: ["❓", "❔", "❓", "🗯️", "💬", "🤭", "🫣"]
+            },
+            { // Slide 10
+                text: "<p>Emmm...</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🥺", "❓", "🤔", "❓"]
+            },
+            { // Slide 11 (Air Terjun)
+                text: "", // Diisi via JS
+                type: "special-11",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😣", "🫣", "🫠", "💌", "💕", "🫶"]
+            },
+            { // Slide 12 (Typing)
+                text: "",
+                type: "special-12",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😫", "🙏", "😭", "😅", "😔"] // Awal
+            },
+            { // Slide 13 (Typing + Siluet)
+                text: "",
+                type: "special-13",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🎉", "🔥", "💝", "💘", "❤️‍🔥", "💕", "🥰", "🫰", "😆"]
+            },
+            { // Slide 14
+                text: "<p>Di tunggu ya jawabannya!</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🍭", "🍬", "🍫", "🧁", "🍩", "🍯"] // Sweety
+            },
+            { // Slide 15
+                text: "<p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p>",
+                buttons: [{txt: "iya/tidak", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🍭", "🍬", "🍫", "🧁", "🍩", "🍯"] // Sweety
+            },
+            { // Slide 16 (Wink)
+                text: "<p>Kalian mungkin belum suka sama aku, tapi gapapa 😁</p>",
+                buttons: [{txt: "Selanjutnya", next: true}, {txt: "Kembali", next: false}],
+                type: "special-16",
+                bgEmojis: ["💙", "💖", "💘", "💝"] // Love Meriah
+            },
+            { // Slide 17
+                text: "<p>Aku bakal tetap ada di sini tetep biasa aja</p>",
+                buttons: [{txt: "Pencet dong terakhir!", next: true}],
+                bgEmojis: ["🥰", "😆", "🫰", "💝", "🫶"]
+            },
+            { // Slide 18 (Ending)
+                text: "<h1>Sekali lagi Selamat Hari Valentine ya Bintang Cantik! ✨🌟</h1>",
+                type: "special-18",
+                buttons: [],
+                bgEmojis: ["🎉", "🔥", "💝", "💘", "🤍", "❤️‍🔥", "💕", "💌", "🫶", "🫰", "😆"]
+            }
+        ];
 
-        // BUAT EMOJI TERBANG - KHUSUS DI SLIDE YANG ADA AKU-NYA
-        function buatEmojiTerbang() {
-            const emoji = document.createElement('div');
-            emoji.className = 'emoji-terbang';
-            emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
-            emoji.style.left = Math.random() * 100 + '%';
-            emoji.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(emoji);
+        let currentSlide = 0;
+        let emojiInterval;
+        const app = document.getElementById('app');
+        const starBg = document.getElementById('star-bg');
+
+        // --- FUNGSI UTAMA ---
+        function renderSlide() {
+            // Bersihkan Interval Lama
+            clearInterval(emojiInterval);
+            document.querySelectorAll('.emoji-bg').forEach(e => e.remove());
+            starBg.style.display = "none";
             
-            // HAPUS EMOJI SETELAH ANIMASI SELESAI
-            setTimeout(() => {
-                emoji.remove();
-            }, 8000);
-        }
+            const slide = slides[currentSlide];
+            let htmlContent = '';
 
-        // BUAT SPARKLE KECIL-KECIL
-        function buatSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.animationDelay = Math.random() * 3 + 's';
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 3000);
-        }
-
-        // TRANSISI SLIDE 1 KE 2 - PASTI HALUS!
-        setTimeout(() => {
-            gantiSlide(2);
-        }, 3000);
-
-        // FUNGSI GANTI SLIDE DENGAN TRANSISI HALUS
-        function gantiSlide(nomor) {
-            // SEMBUNYIKAN SEMUA SLIDE
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach(slide => slide.classList.remove('active'));
-            
-            // TAMPILKAN SLIDE YANG DIPILIH
-            document.getElementById('slide' + nomor).classList.add('active');
-
-            // JIKA SLIDE 11 (ADA AKU-NYA), AKTIFKAN EMOJI TERBANG
-            if (nomor >= 4 && nomor <=16) {
-                setInterval(buatEmojiTerbang, 1000);
+            // Cek tipe slide
+            if (slide.type === "special-4") {
+                handleSlide4();
+                return;
+            } else if (slide.type === "special-11") {
+                handleSlide11();
+                return;
+            } else if (slide.type === "special-12") {
+                handleSlide12();
+                return;
+            } else if (slide.type === "special-13") {
+                handleSlide13();
+                return;
+            } else if (slide.type === "special-18") {
+                startFireworks(slide.bgEmojis);
+                htmlContent = slide.text;
             } else {
-                // HENTIKAN EMOJI JIKA BUKAN SLIDE YANG ADA AKU-NYA
-                clearInterval(buatEmojiTerbang);
+                htmlContent = slide.text;
+                if(slide.special === "stars") starBg.style.display = "block";
+                startEmojiRain(slide.bgEmojis);
+            }
+
+            // Render Tombol
+            if (slide.buttons && slide.buttons.length > 0) {
+                htmlContent += `<div class="btn-group">`;
+                slide.buttons.forEach(btn => {
+                    // Logic Tombol Kembali
+                    const onClick = btn.next ? `nextSlide()` : `prevSlide()`;
+                    const btnClass = btn.next ? '' : 'secondary';
+                    htmlContent += `<button class="${btnClass}" onclick="${onClick}">${btn.txt}</button>`;
+                });
+                htmlContent += `</div>`;
+            }
+
+            // Efek Khusus Slide 16 (Wink)
+            if (slide.type === "special-16") {
+                setTimeout(() => {
+                    const wink = document.getElementById('wink-overlay');
+                    wink.style.display = 'flex';
+                    setTimeout(() => { wink.style.display = 'none'; }, 1000);
+                }, 2000);
+            }
+
+            app.innerHTML = htmlContent;
+
+            // Auto Next Slide 1
+            if (slide.type === 'auto') {
+                setTimeout(nextSlide, slide.timer);
             }
         }
 
-        // JALANKAN EFEK SPARKLE SETIAP DETIK
-        setInterval(buatSparkle, 300);
-    </script>
-</body>
-  </html>
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide();
+            }
+        }
 
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide();
+            }
+        }
+
+        // --- FUNGSI ANIMASI & EFEK KHUSUS ---
+
+        function startEmojiRain(emojis, mode = 'float') {
+            if (!emojis || emojis.length === 0) return;
+            
+            emojiInterval = setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('emoji-bg');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                
+                if (mode === 'waterfall') {
+                    el.style.animation = `waterfall ${Math.random() * 1 + 1}s linear`;
+                } else if (mode === 'explode') {
+                    el.style.top = "50%";
+                    el.style.left = "50%";
+                    const x = (Math.random() - 0.5) * 200;
+                    const y = (Math.random() - 0.5) * 200;
+                    el.style.transition = "all 1s ease-out";
+                    setTimeout(() => { 
+                        el.style.transform = `translate(${x}vw, ${y}vh) scale(0)`; 
+                    }, 50);
+                } else {
+                    // Default Float
+                    el.style.animation = `floatUp ${Math.random() * 3 + 4}s linear`;
+                }
+                
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 5000);
+            }, 300);
+        }
+
+        // --- HANDLER SLIDE KOMPLEKS ---
+
+        function handleSlide4() {
+            const overlay = document.getElementById('overlay-cover');
+            overlay.style.display = "flex";
+            overlay.innerHTML = "🎉🔥💝💘❤️‍🔥💕"; // Emoji Besar
+            app.style.opacity = 0;
+
+            // 1. Meledak
+            setTimeout(() => {
+                overlay.style.transition = "transform 1s, opacity 1s";
+                overlay.style.transform = "scale(5)";
+                overlay.style.opacity = 0;
+            }, 1000);
+
+            // 2. Teks Valentine & Ganti Background
+            setTimeout(() => {
+                overlay.style.display = "none";
+                app.style.opacity = 1;
+                app.innerHTML = `<h2>Selamat Hari Valentine!</h2>`;
+                startEmojiRain(["🎉", "🔥", "💝", "💘", "❤️‍🔥", "💕"]);
+            }, 2000);
+
+            // 3. Penyesalan Muncul & Ubah BG ke Sedih
+            setTimeout(() => {
+                app.innerHTML = `
+                    <h2>Selamat Hari Valentine!</h2>
+                    <p style="animation: fadeInUp 1s">Maaf ya gak nepati janji...</p>
+                `;
+                // Bersihkan emoji lama, ganti sedih
+                clearInterval(emojiInterval);
+                document.querySelectorAll('.emoji-bg').forEach(e => e.remove());
+                startEmojiRain(["😭", "😔", "🙏", "😫", "😅"]);
+            }, 4500);
+
+            // 4. Harmoni Emosi & Tombol Muncul
+            setTimeout(() => {
+                // Campuran
+                startEmojiRain(["🎉", "🔥", "💝", "😭", "😔"]);
+                app.innerHTML += `
+                    <div class="btn-group" style="margin-top:20px">
+                        <button onclick="nextSlide()">Lanjut</button>
+                    </div>
+                `;
+            }, 7000);
+        }
+
+        function handleSlide11() {
+            // Awal: Air Terjun Emoji
+            startEmojiRain(["😣", "🫣", "🫠", "💌", "💕", "🫶"], 'waterfall');
+            app.innerHTML = ""; // Kosong dulu
+
+            // Transisi Teks
+            setTimeout(() => {
+                clearInterval(emojiInterval); // Stop sebentar
+                app.innerHTML = `<h2>Bintang, kamu mau gak jadi pacarku? 😖👉👈</h2>`;
+            }, 2000);
+
+            // Lanjut lagi & Tombol
+            setTimeout(() => {
+                startEmojiRain(["😣", "🫣", "🫠", "💌", "💕", "🫶"]); // Mode biasa
+                app.innerHTML += `
+                    <div class="btn-group">
+                        <button onclick="nextSlide()">Selanjutnya</button>
+                        <button class="secondary" onclick="prevSlide()">Kembali</button>
+                    </div>
+                `;
+            }, 4000);
+        }
+
+        function handleSlide12() {
+            startEmojiRain(["😫", "🙏", "😭", "😅", "😔"]);
+            app.innerHTML = `<p>Maaf ya tiba-tiba nembak gitu...</p><p id="type12" class="typing"></p>`;
+            
+            // Efek Ketik
+            setTimeout(() => {
+                typeWriter("Aku sendiri juga bingung kenapa tiba-tiba berani bilang begini 😅🙏", "type12", 50);
+            }, 1000);
+
+            // Transisi Emoji ke Senang
+            setTimeout(() => {
+                clearInterval(emojiInterval);
+                document.querySelectorAll('.emoji-bg').forEach(e => e.style.opacity = 0);
+                startEmojiRain(["🎉", "🔥", "💝", "💘", "❤️‍🔥", "💕"]);
+                // Tampilkan tombol setelah ngetik
+                setTimeout(() => {
+                     app.innerHTML += `
+                        <div class="btn-group">
+                            <button onclick="nextSlide()">Selanjutnya</button>
+                            <button class="secondary" onclick="prevSlide()">Kembali</button>
+                        </div>
+                    `;
+                }, 4000);
+            }, 3000);
+        }
+
+        function handleSlide13() {
+            startEmojiRain(["🎉", "🔥", "💝", "💘", "❤️‍🔥", "💕", "🥰", "🫰", "😆"]);
+            app.innerHTML = `<p id="type13" class="typing"></p>`;
+            
+            typeWriter("Kalau mau jawab atau cuma chat aja,", "type13", 50, () => {
+                // Callback setelah ngetik selesai
+                setTimeout(() => {
+                    const p2 = document.createElement('p');
+                    p2.innerHTML = "nomor aku masih sama kok 😆";
+                    p2.style.opacity = 0;
+                    p2.style.transition = "opacity 2s";
+                    app.insertBefore(p2, app.lastChild); // Masukkan sebelum cursor/tombol
+                    
+                    setTimeout(() => { p2.style.opacity = 1; }, 100);
+
+                    // Tombol
+                    const div = document.createElement('div');
+                    div.className = "btn-group";
+                    div.innerHTML = `<button onclick="nextSlide()">Selanjutnya</button><button class="secondary" onclick="prevSlide()">Kembali</button>`;
+                    app.appendChild(div);
+                }, 500);
+            });
+        }
+
+        function startFireworks(emojis) {
+            app.innerHTML = `<h1>Sekali lagi Selamat Hari Valentine ya Bintang Cantik! ✨🌟</h1>`;
+            // Interval sangat cepat untuk efek kembang api
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('emoji-bg');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Posisi acak meledak
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                el.style.left = startX + 'vw';
+                el.style.top = startY + 'vh';
+                
+                el.style.animation = "explode 1s ease-out forwards";
+                document.body.appendChild(el);
+                
+                setTimeout(() => el.remove(), 1000);
+            }, 100);
+        }
+
+        // --- UTILS ---
+        function typeWriter(text, elementId, speed, callback) {
+            let i = 0;
+            const el = document.getElementById(elementId);
+            el.innerHTML = "";
+            function 
