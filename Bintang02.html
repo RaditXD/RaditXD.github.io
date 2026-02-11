@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘 SURPRISE UNTUK BINTANG 💘</title>
+    <style>
+        /* SAMA DENGAN VERSI SEBELUMNYA, HANYA ADA TAMBAHAN EMOJI */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(120deg, #0A2463, #1E88E5, #3949AB);
+            background-size: 200% 200%;
+            animation: bg-gerak 15s ease infinite;
+        }
+
+        @keyframes bg-gerak {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 5;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 20px #FFD700, 0 0 40px #FFFFFF, 0 0 60px #FF69B4;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 2rem;
+            text-shadow: 0 0 15px #FFFFFF;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .tombol {
+            background: linear-gradient(45deg, #FF69B4, #FFD700);
+            color: #0A2463;
+            border: none;
+            padding: 20px 45px;
+            margin: 10px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .tombol:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+        }
+
+        /* EMOJI TERBANG KHUSUS SLIDE */
+        .emoji-terbang {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0;
+            animation: emoji-terbang 8s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes emoji-terbang {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) rotate(360deg);
+            }
+        }
+
+        /* SPARKLE KECIL-KECIL */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: sparkle 3s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================== SLIDE 1 ================== -->
+    <div class="slide active" id="slide1">
+        <h1>✨ HAI BINTANG ✨</h1>
+        <p>INI BUAT KAMU! 💘🌟🎉</p>
+    </div>
+
+    <!-- ================== SLIDE 2 ================== -->
+    <div class="slide" id="slide2">
+        <p>Udah buka belum? 🤷‍♂️🙎‍♂️❓❓⁉️</p>
+        <button class="tombol" onclick="gantiSlide(3)">Sudah</button>
+    </div>
+
+    <!-- ================== SLIDE 3 ================== -->
+    <div class="slide" id="slide3">
+        <p>Kalau udah buka berarti hadiahnya udah sampe ya?!</p>
+        <button class="tombol" onclick="gantiSlide(4)">Iyaa</button>
+        <button class="tombol" onclick="gantiSlide(2)">kok mau balik ???</button>
+    </div>
+
+    <!-- ================== SLIDE 4 ================== -->
+    <div class="slide" id="slide4">
+        <p>Selamat Hari Valentine!<br>Maaf ya gak nepati janji – padahal udah janji gak kasih apa-apa.</p>
+        <button class="tombol" onclick="gantiSlide(5)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(3)">masa balik lagi ??</button>
+    </div>
+
+    <!-- ================== SLIDE 5 ================== -->
+    <div class="slide" id="slide5">
+        <p>Semoga kamu seneng sama hadiah aku ya!</p>
+        <button class="tombol" onclick="gantiSlide(6)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(4)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 6 ================== -->
+    <div class="slide" id="slide6">
+        <p>Jujur, aku masih belum tahu kenapa suka sama kamu.</p>
+        <button class="tombol" onclick="gantiSlide(7)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(5)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 7 ================== -->
+    <div class="slide" id="slide7">
+        <p>Kalian kan kembar, cuma beda Bintang dan Bulan aja.<br>Tapi jelas aku suka kalian berdua!</p>
+        <button class="tombol" onclick="gantiSlide(8)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(6)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 8 ================== -->
+    <div class="slide" id="slide8">
+        <p>Maaf juga ya kalau 2 bulan terakhir sering chat dan mungkin ganggu kamu.<br>Kalau risih, aku minta maaf ya!</p>
+        <button class="tombol" onclick="gantiSlide(9)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(7)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 9 ================== -->
+    <div class="slide" id="slide9">
+        <p>Jangan kasih tau atau liatin ke siapapun ya<br>Aku malu banget!</p>
+        <button class="tombol" onclick="gantiSlide(10)">Iya</button>
+        <button class="tombol" onclick="gantiSlide(8)">iya deh</button>
+    </div>
+
+    <!-- ================== SLIDE 10 ================== -->
+    <div class="slide" id="slide10">
+        <p>Emmm...</p>
+        <button class="tombol" onclick="gantiSlide(11)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(9)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 11 ================== -->
+    <div class="slide" id="slide11">
+        <p>Bintang, kamu mau gak jadi pacarku?</p>
+        <button class="tombol" onclick="gantiSlide(12)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(10)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 12 ================== -->
+    <div class="slide" id="slide12">
+        <p>Maaf ya tiba-tiba nembak gitu...<br>Aku sendiri juga bingung kenapa berani bilang begini!</p>
+        <button class="tombol" onclick="gantiSlide(13)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(11)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 13 ================== -->
+    <div class="slide" id="slide13">
+        <p>Kalau mau jawab atau cuma mau chat aja,<br>nomor aku masih sama kok</p>
+        <button class="tombol" onclick="gantiSlide(14)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(12)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 14 ================== -->
+    <div class="slide" id="slide14">
+        <p>Di tunggu ya jawabannya!</p>
+        <button class="tombol" onclick="gantiSlide(15)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(13)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 15 ================== -->
+    <div class="slide" id="slide15">
+        <p>Aku malu banget buat bilang ini langsung, tapi harus berani kan?</p>
+        <button class="tombol" onclick="gantiSlide(16)">iya/tidak</button>
+        <button class="tombol" onclick="gantiSlide(14)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 16 ================== -->
+    <div class="slide" id="slide16">
+        <p>Kalian mungkin belum suka sama aku, tapi gapapa – aku bakal tetap ada dan merawat rasa ini! hehehe</p>
+        <button class="tombol" onclick="gantiSlide(17)">Selanjutnya</button>
+        <button class="tombol" onclick="gantiSlide(15)">Kembali</button>
+    </div>
+
+    <!-- ================== SLIDE 17 ================== -->
+    <div class="slide" id="slide17">
+        <p>Sekali lagi Selamat Hari Valentine ya Cantik! ✨🌟</p>
+    </div>
+
+
+    <script>
+        // DAFTAR EMOJI KHUSUS SLIDE INI
+        const emojiList = ['🥺','👉','👈','🫠','💌','💕','🫶','💖','💝'];
+
+        // BUAT EMOJI TERBANG - KHUSUS DI SLIDE YANG ADA AKU-NYA
+        function buatEmojiTerbang() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji-terbang';
+            emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            // HAPUS EMOJI SETELAH ANIMASI SELESAI
+            setTimeout(() => {
+                emoji.remove();
+            }, 8000);
+        }
+
+        // BUAT SPARKLE KECIL-KECIL
+        function buatSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        // TRANSISI SLIDE 1 KE 2 - PASTI HALUS!
+        setTimeout(() => {
+            gantiSlide(2);
+        }, 3000);
+
+        // FUNGSI GANTI SLIDE DENGAN TRANSISI HALUS
+        function gantiSlide(nomor) {
+            // SEMBUNYIKAN SEMUA SLIDE
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // TAMPILKAN SLIDE YANG DIPILIH
+            document.getElementById('slide' + nomor).classList.add('active');
+
+            // JIKA SLIDE 11 (ADA AKU-NYA), AKTIFKAN EMOJI TERBANG
+            if (nomor >= 4 && nomor <=16) {
+                setInterval(buatEmojiTerbang, 1000);
+            } else {
+                // HENTIKAN EMOJI JIKA BUKAN SLIDE YANG ADA AKU-NYA
+                clearInterval(buatEmojiTerbang);
+            }
+        }
+
+        // JALANKAN EFEK SPARKLE SETIAP DETIK
+        setInterval(buatSparkle, 300);
+    </script>
+</body>
+  </html>
+
