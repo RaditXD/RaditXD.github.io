@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Valentine, Bintang!</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #0a1f44; /* Biru gelap */
+      color: white;
+      margin: 0;
+      overflow: hidden; /* Hide scrollbars */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .slide {
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #FF69B4; /* Pink */
+    }
+
+    button {
+      background-color: #FFD700; /* Gold */
+      color: #000080; /* Navy */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Starry Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('star-background.gif'); /* Ganti dengan URL gambar bintang kelap-kelip kamu */
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    /* Emoji Rain */
+    .emoji-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .emoji-rain::before {
+      content: '💖✨🌟❤️💫😍🥰💘💝💞💓💗💖✨🌟❤️💫😍🥰💘💝💞💓💗';
+      font-size: 2em;
+      animation: rain 5s linear infinite;
+      display: block;
+    }
+
+    @keyframes rain {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="slide" id="slide1">
+    <h2>Hai Bintang! 💫✨</h2>
+    <p>Ada sesuatu kecil buat kamu, coba buka deh...</p>
+    <button onclick="nextSlide(2)">Buka Surat 💌</button>
+  </div>
+
+  <div class="slide" id="slide2" style="display: none;">
+    <h2>Hadiahnya udah sampai di tangan kan? 🎁</h2>
+    <button onclick="nextSlide(3)">Sudah!</button>
+  </div>
+
+  <div class="slide" id="slide3" style="display: none;">
+    <h2>Kalau sudah sampai, berarti misinya berhasil! Hehe.</h2>
+    <button onclick="nextSlide(4)">Iyaa</button>
+    <button onclick="prevSlide(2)">Kembali</button>
+  </div>
+
+  <div class="slide" id="slide4" style="display: none;">
+    <h2>Selamat Hari Valentine! ❤️</h2>
+    <p>Maaf ya kalau kemarin sempat bilang nggak bakal kasih apa-apa, ternyata aku bohong sedikit.</p>
+    <button onclick="nextSlide(5)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide5" style="display: none;">
+    <h2>Semoga kamu suka ya sama apa yang aku kasih!</h2>
+    <button onclick="nextSlide(6)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide6" style="display: none;">
+    <h2>Jujur, aku sendiri bingung kenapa bisa se-kagum ini sama kamu.</h2>
+    <button onclick="nextSlide(7)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide7" style="display: none;">
+    <h2>Kalian berdua unik banget, Bintang & Bulan. Kembar dengan sifatnya yang lucu-lucu</h2>
+    <button onclick="nextSlide(8)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide8" style="display: none;">
+    <h2>Maaf ya kalau 2 bulan ini aku sering nge-chat terus. Kalau kamu merasa keganggu, bilang aja ya, jangan sungkan! 🙏</h2>
+    <button onclick="nextSlide(9)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide9" style="display: none;">
+    <h2>Oh iya, surat/hadiah ini rahasia kita aja ya? Aku malu kalau sampai orang lain tahu! 🫣</h2>
+    <button onclick="nextSlide(10)">Iya, Janji</button>
+    <button onclick="prevSlide(8)">Iya dehh</button>
+  </div>
+
+  <div class="slide" id="slide10" style="display: none;">
+    <h2>Aku cuma berharap kita tetep bisa ngobrol enak dan nggak jadi asing ke depannya.</h2>
+    <button onclick="nextSlide(11)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide11" style="display: none;">
+    <h2>Kapanpun kamu butuh temen ngobrol, nomorku masih yang lama kok. Feel free to reach out! 😊</h2>
+    <button onclick="nextSlide(12)">Selanjutnya</button>
+  </div>
+
+  <div class="slide" id="slide12" style="display: none;">
+    <h2>Sekali lagi, Happy Valentine, Bintang! ✨🌟💖</h2>
+    <div class="emoji-rain"></div>
+  </div>
+</div>
+
+<script>
+  function nextSlide(slideNumber) {
+    hideAllSlides();
+    document.getElementById("slide" + slideNumber).style.display = "block";
+  }
+
+  function prevSlide(slideNumber) {
+    hideAllSlides();
+    document.getElementById("slide" + slideNumber).style.display = "block";
+  }
+
+  function hideAllSlides() {
+    var slides = document.getElementsByClassName("slide");
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+  }
+
+  // Show the first slide initially
+  nextSlide(1);
+</script>
+
+</body>
+      </html>
+      
