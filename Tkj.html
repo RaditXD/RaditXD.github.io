@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Bintang ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & BASIC STYLE --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #021B79, #0575E6); /* Tema Biru */
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* --- BACKGROUND BINTANG --- */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/V7eY7YG.png'),
+                        linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)); /* Gradasi Gelap */
+            background-size: cover;
+            background-blend-mode: overlay;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        /* --- CONTAINER --- */
+        #app {
+            z-index: 10;
+            width: 90%;
+            max-width: 600px; /* Agak Lebih Lebar */
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* Lebih Merata */
+            align-items: center;
+        }
+
+        h1, h2 { margin-bottom: 20px; text-shadow: 0 2px 6px rgba(0,0,0,0.5); font-size: 2.5rem; }
+        p { font-size: 1.3rem; line-height: 1.7; margin-bottom: 35px; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+
+        /* --- TOMBOL --- */
+        .btn-group {
+            display: flex;
+            justify-content: flex-end; /* Kanan Semua */
+            width: 100%;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #00d2ff; /* Biru Cerah */
+            color: #021B79;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.5);
+        }
+
+        button:hover { transform: scale(1.07); background: #fff; color: #0077CC; }
+        button.secondary { background: rgba(255, 255, 255, 0.2); color: white; }
+
+        /* --- ANIMASI EMOJI LATAR --- */
+        .emoji-bg {
+            position: absolute;
+            top: -10vh;
+            font-size: 2.5rem;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+        }
+
+        @keyframes floatUp { to { transform: translateY(-120vh) rotate(360deg); } }
+        @keyframes floatDown { to { transform: translateY(120vh) rotate(360deg); } }
+        @keyframes waterfall { 
+            0% { top: -10%; opacity: 1; } 
+            100% { top: 110%; opacity: 1; } 
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(10); opacity: 0; }
+        }
+
+        /* --- OVERLAY KHUSUS (Slide 4) --- */
+        #overlay-cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 30, 120, 0.9); /* Biru Gelap Transparan */
+            z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 4rem; flex-wrap: wrap;
+            transition: opacity 1s;
+        }
+
+        /* --- EFEK KEDIP (Slide 16) --- */
+        #wink-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 99;
+            display: none; justify-content: center; align-items: center;
+            font-size: 12rem;
+        }
+
+        /* --- BINTANG DI BELAKANG (Slide 3) --- */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://i.imgur.com/V7eY7YG.png');
+            pointer-events: none; opacity: 0.6; z-index: 0;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.4; } to { opacity: 0.8; } }
+
+        /* --- KURSOR KETIK --- */
+        .typing::after { content: '|'; animation: blink 0.9s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div id="star-bg" style="display:none;" class="stars"></div>
+    
+    <div id="overlay-cover" style="display:none;">🎉🔥💝💘❤️‍🔥💕</div>
+    
+    <div id="wink-overlay">😉</div>
+
+    <div id="app">
+        </div>
+
+    <script>
+        // --- DATA SLIDE (ROMANTIS) ---
+        const slides = [
+            { // Slide 1
+                text: "<h1>Hai Bintang! ✨🌟</h1><p>Ini kejutan kecil untukmu...</p>",
+                type: "auto",
+                bgEmojis: ["✨", "🌟", "💙", "💖"],
+                timer: 4000
+            },
+            { // Slide 2
+                text: "<p>Kamu sudah membukanya belum, Bintang?</p>",
+                buttons: [{txt: "Sudah", next: true}],
+                bgEmojis: ["🤷‍♂️", "🤔", "😁", "🤭", "❓", "⁉️"]
+            },
+            { // Slide 3
+                text: "<p>Wah, berarti hadiahnya sudah sampai di tanganmu, ya?</p>",
+                buttons: [
+                    {txt: "Betul!", next: true},
+                    {txt: "Mau kembali?", next: false}
+                ],
+                special: "stars", // Efek Bintang
+                bgEmojis: []
+            },
+            { // Slide 4 (Kompleks)
+                text: "", // Diisi via JS khusus
+                type: "special-4",
+                buttons: [{txt: "Lanjut", next: true}], // Muncul nanti
+                bgEmojis: [] 
+            },
+            { // Slide 5
+                text: "<p>Semoga hadiah ini bisa membuatmu tersenyum ya, Bintang! 😊</p>",
+                buttons: [{txt: "Lanjut", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😁", "😆", "😝", "😜", "😅", "🤪"]
+            },
+            { // Slide 6
+                text: "<p>Sejujurnya, aku pun tak tahu mengapa hatiku terpikat olehmu...</p>",
+                buttons: [{txt: "Lanjut", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["💙", "🤔", "💭"]
+            },
+            { // Slide 7
+                text: "<p>Kau dan dia bagaikan kembar, beda Bintang dan Bulan saja. Tapi percayalah, aku menyayangi kalian berdua! ✨🌙</p>",
+                buttons: [{txt: "Lanjut", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["🤭", "😹", "🫰", "🫶", "😜", "🤪"]
+            },
+            { // Slide 8
+                text: "<p>Maafkan aku jika dalam dua bulan terakhir ini, kehadiranku lewat pesan seringkali mengganggumu. Jika itu membuatmu tak nyaman, aku sungguh minta maaf... 😔🙏</p>",
+                buttons: [{txt: "Lanjut", next: true}, {txt: "Kembali", next: false}],
+                bgEmojis: ["😭", "🙏", "😔", "🥺", "🙃"]
+            },
+            { // Slide 9
+                text: "<p>Kuharap, ini menjadi rahasia antara kita saja, ya? Aku benar-benar malu jika sampai orang lain tahu... 🫣🤭</p>",
+                buttons: [{txt: "Kupahami", next: true}, {txt: "Tetap kembali", next: false}],
+                bgEmojis: ["❓", "❔", "❓", "🗯️", "💬", "🤭", "🫣"]
+            },
+            { // Slide 10
+                text: "<p>Semoga jalinan ini akan terus berlanjut, walau kita tak terikat dalam hubungan asmara... 💖</p>",
+                buttons: [{txt: "Lanjut", next: true}],
+            },
+            { // Slide 11
+                text: "<p>Jangan sungkan untuk menghubungiku ya, Bintang! Nomor ini akan selalu sama untukmu. 😉</p>",
+                buttons: [{txt: "Lanjut", next: true}],
+            },
+            { // Slide 12
+                text: "<h1>Selamat Hari Valentine, Bintangku yang Cantik! ✨🌟💖</h1>",
+                type: "special-12",
+                buttons: [],
+                bgEmojis: ["🎉", "🔥", "💝", "💘", "🤍", "❤️‍🔥", "💕", "💌", "🫶", "🫰", "😆"]
+            }
+        ];
+
+        let currentSlide = 0;
+        let emojiInterval;
+        const app = document.getElementById('app');
+        const starBg = document.getElementById('star-bg');
+
+        // --- FUNGSI UTAMA ---
+        function renderSlide() {
+            // Bersihkan Interval
+            clearInterval(emojiInterval);
+            document.querySelectorAll('.emoji-bg').forEach(e => e.remove());
+            starBg.style.display = "none";
+            
+            const slide = slides[currentSlide];
+            let htmlContent = '';
+
+            // Cek tipe slide
+            if (slide.type === "special-4") {
+                handleSlide4();
+                return;
+            }  else if (slide.type === "special-12") {
+                startFireworks(slide.bgEmojis);
+                htmlContent = slide.text;
+            } else {
+                htmlContent = slide.text;
+                if(slide.special === "stars") starBg.style.display = "block";
+                startEmojiRain(slide.bgEmojis);
+            }
+
+            // Render Tombol
+            if (slide.buttons && slide.buttons.length > 0) {
+                htmlContent += `<div class="btn-group">`;
+                slide.buttons.forEach(btn => {
+                    const onClick = btn.next ? `nextSlide()` : `prevSlide()`;
+                    const btnClass = btn.next ? '' : 'secondary';
+                    htmlContent += `<button class="${btnClass}" onclick="${onClick}">${btn.txt}</button>`;
+                });
+                htmlContent += `</div>`;
+            }
+
+            app.innerHTML = htmlContent;
+
+            // Auto Next Slide 1
+            if (slide.type === 'auto') {
+                setTimeout(nextSlide, slide.timer);
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide();
+            }
+        }
+
+        // --- ANIMASI EMOJI ---
+        function startEmojiRain(emojis, mode = 'float') {
+            if (!emojis || emojis.length === 0) return;
+            
+            emojiInterval = setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('emoji-bg');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                
+                if (mode === 'waterfall') {
+                    el.style.animation = `waterfall ${Math.random() * 1 + 1}s linear`;
+                } else if (mode === 'explode') {
+                    el.style.top = "50%";
+                    el.style.left = "50%";
+                    const x = (Math.random() - 0.5) * 200;
+                    const y = (Math.random() - 0.5) * 200;
+                    el.style.transition = "all 1s ease-out";
+                    setTimeout(() => { 
+                        el.style.transform = `translate(${x}vw, ${y}vh) scale(0)`; 
+                    }, 50);
+                } else {
+                    el.style.animation = `floatUp ${Math.random() * 3 + 4}s linear`;
+                }
+                
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 5000);
+            }, 300);
+        }
+
+        // --- SLIDE 4 (KOMPLEKS) ---
+        function handleSlide4() {
+            const overlay = document.getElementById('overlay-cover');
+            overlay.style.display = "flex";
+            overlay.innerHTML = "🎉🔥💝💘❤️‍🔥💕"; // Emoji Besar
+            app.style.opacity = 0;
+
+            setTimeout(() => {
+                overlay.style.transition = "transform 1s, opacity 1s";
+                overlay.style.transform = "scale(5)";
+                overlay.style.opacity = 0;
+            }, 1000);
+
+            setTimeout(() => {
+                overlay.style.display = "none";
+                app.style.opacity = 1;
+                app.innerHTML = `<h2>Selamat Hari Valentine!</h2>`;
+                startEmojiRain(["🎉", "🔥", "💝", "💘", "❤️‍🔥", "💕"]);
+            }, 2000);
+
+            setTimeout(() => {
+                app.innerHTML = `
+                    <h2>Selamat Hari Valentine!</h2>
+                    <p style="animation: fadeInUp 1s">Maaf ya, aku tak bisa menepati janji...</p>
+                `;
+                clearInterval(emojiInterval);
+                document.querySelectorAll('.emoji-bg').forEach(e => e.remove());
+                startEmojiRain(["😭", "😔", "🙏", "😫", "😅"]);
+            }, 4500);
+
+            setTimeout(() => {
+                startEmojiRain(["🎉", "🔥", "💝", "😭", "😔"]);
+                app.innerHTML += `
+                    <div class="btn-group" style="margin-top:
+  
